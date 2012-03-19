@@ -3,14 +3,13 @@ Getting started with FlyScala
 Compilation
 ===========
 
-run the sbt script which will get a recent version of sbt and start it.
+run the sbt script (from https://github.com/paulp/sbt-extras) which will get a recent version of sbt and start it.
 
-In sbt, type 'compile'. You can 'clean' before if you like.
-
-For continuous incremental compilation type '~compile'
 
 Testing
 =======
+The tests require a local fly server.
+
 In sbt, type test for continuous testing as you touch and save files
 
 Publishing to Sonatype
@@ -38,10 +37,6 @@ get the server to include in the distribution.
 
 Modifying the Project
 =====================
-Our sbt project file is project/build/FlyScalaProject (which is just a Scala class).
+Our sbt project file is project/FlyScalaProject.scala (which is just a Scala class).
 
-Upgrading SBT
-=============
-The sbt jar is actually a launcher which downloads the version of sbt you want to use.
-When you upgrade the launcher you probably want to upgrade your install of sbt too.
-In sbt type: set sbt.version x.y.z and follow the instructions.
+
