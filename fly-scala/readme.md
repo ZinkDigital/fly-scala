@@ -1,7 +1,5 @@
-Getting started with FlyScala 
-
-Compilation
-===========
+Getting Started
+===============
 
 run the sbt script (from https://github.com/paulp/sbt-extras) which will get a recent version of sbt and start it.
 
@@ -10,7 +8,7 @@ Testing
 =======
 The tests require a local fly server.
 
-In sbt, type test for continuous testing as you touch and save files
+In sbt, type ~test for continuous testing as you touch and save files
 
 Publishing to Sonatype
 ==========================
