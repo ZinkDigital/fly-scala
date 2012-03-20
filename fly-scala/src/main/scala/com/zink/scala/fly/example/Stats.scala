@@ -21,10 +21,10 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.zink.scala.fly.example
 
-import com.zink.scala.fly.stats.StatsDecoder;
-import com.zink.scala.fly.stats.StatsPrinter;
+import com.zink.scala.fly.stats.StatsDecoder
+import com.zink.scala.fly.stats.StatsPrinter
 
-import java.net.Socket;
+import java.net.Socket
 
 /**
  *  Log the server's stats periodically

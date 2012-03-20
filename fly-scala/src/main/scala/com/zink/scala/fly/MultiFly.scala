@@ -14,7 +14,7 @@ trait MultiFly extends FlyPrime {
    *  in milli-seconds that the objects will 'live' in the Space.
    *
    * @param entries - The object to put in the Space
-   * @param leaseTime - The time in milliseconds the objects will live in the Space
+   * @param lease - The time in milliseconds the objects will live in the Space
    * @return leaseTime - The space can return a shorter lease than the requested 
    *  lease time. To be sure that your object has been leased for the given time
    *  check that the returned lease is the same as the requested lease.

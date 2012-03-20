@@ -5,6 +5,7 @@ import com.zink.scala.fly.FlyAccessException._
 import java.net.DatagramPacket
 import java.net.InetAddress
 import java.net.MulticastSocket
+
 class MulticastRequestor {
    private[this] val bytesAddress = Array(232.toByte, 43.toByte, 96.toByte, 232.toByte)
    

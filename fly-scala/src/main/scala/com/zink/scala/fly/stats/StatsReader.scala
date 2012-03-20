@@ -1,6 +1,7 @@
 package com.zink.scala.fly.stats
 
 import java.io._
+
 object StatsReader {
   def main(args: Array[String]) {
 

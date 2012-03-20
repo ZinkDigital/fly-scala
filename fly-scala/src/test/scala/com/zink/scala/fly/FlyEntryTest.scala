@@ -4,8 +4,6 @@ package com.zink.scala.fly
 import com.zink.scala.fly.kit.FlyFactory
 
 import org.specs2.mutable._
-import org.specs2.specification._
-import org.specs2.execute._
 
 class FlyEntryTest extends SpecificationWithJUnit {
   

@@ -7,7 +7,7 @@ case class FlyServerRep(flyAddr:InetAddress, flyTags:Array[String]) {
     /**
      * Test if the tags in this server rep match the seach tags
      * 
-     * @param The tags are being search for by the user
+     * @param tags The tags being search for by the user
      * @return true if the tags matched, false otherwise
      */
     def tagsMatch(tags:Array[String]):Boolean = {
