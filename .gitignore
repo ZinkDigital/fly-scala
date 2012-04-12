@@ -1,4 +1,8 @@
 .DS_Store
 .lib
 target
+.target
+.classpath
+.project
+.cache
 project/target
