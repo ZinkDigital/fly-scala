@@ -16,6 +16,8 @@ class CaseClassSpec extends SpecificationWithJUnit {
     "put and take simple case classes" in {
       val special = SpecialCase(3, "hi")
       fly.write(special, 1000L)
+      
+      fly.take(SpecialCase(3, "Nope"), 0) must beNone
       fly.take(SpecialCase(null, null), 0) must beSome(special)
     }
     

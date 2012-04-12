@@ -7,9 +7,8 @@ import java.lang.reflect.Modifier._
  *  A Filter for fields of an object we can persist.
  */
 object FieldFilter {
-  def apply(field: Field): Boolean = {
-    val modVal = field.getModifiers
-    /* !isFinal(modVal) && */ 
-    !isTransient(modVal) && !isStatic(modVal)
-  }
+  
+  def ignored(mod:Int) = isTransient(mod) || isStatic(mod)
+  
+  def apply(field: Field) = !ignored(field.getModifiers)
 }
