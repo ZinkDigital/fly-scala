@@ -4,9 +4,9 @@ import com.zink.scala.fly.kit.FlyFactory
 
 import org.specs2.mutable._
 
-case class SpecialCase(var x: Int, var y: String)
+case class SpecialCase(var x: BigInt, var y: String)
 
-case class ReallySpecialCase(var z: Int, var s: SpecialCase)
+case class ReallySpecialCase(var z: BigInt, var s: SpecialCase)
 
 class CaseClassSpec extends SpecificationWithJUnit {
 
@@ -16,7 +16,7 @@ class CaseClassSpec extends SpecificationWithJUnit {
     "put and take simple case classes" in {
       val special = SpecialCase(3, "hi")
       fly.write(special, 1000L)
-      fly.take(special, 0) must beSome(special)
+      fly.take(SpecialCase(null, null), 0) must beSome(special)
     }
     
     "put and take nested case classes" in {
@@ -24,7 +24,7 @@ class CaseClassSpec extends SpecificationWithJUnit {
       val nothingSpecial = ReallySpecialCase(10, special)
       
       fly.write(nothingSpecial, 1000L)
-      fly.take(nothingSpecial, 0) must beSome(nothingSpecial)
+      fly.take(ReallySpecialCase(null, null), 0) must beSome(nothingSpecial)
     }
   }
 }
