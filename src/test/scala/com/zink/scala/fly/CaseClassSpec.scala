@@ -4,9 +4,9 @@ import com.zink.scala.fly.kit.FlyFactory
 
 import org.specs2.mutable._
 
-case class SpecialCase(var x: BigInt, var y: String)
+case class SpecialCase(x: BigInt, y: String)
 
-case class ReallySpecialCase(var z: BigInt, var s: SpecialCase)
+case class ReallySpecialCase(z: BigInt, s: SpecialCase)
 
 class CaseClassSpec extends SpecificationWithJUnit {
 

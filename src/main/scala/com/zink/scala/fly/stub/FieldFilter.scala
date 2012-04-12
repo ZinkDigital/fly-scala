@@ -9,6 +9,7 @@ import java.lang.reflect.Modifier._
 object FieldFilter {
   def apply(field: Field): Boolean = {
     val modVal = field.getModifiers
-    !isFinal(modVal) && !isTransient(modVal) && !isStatic(modVal)
+    /* !isFinal(modVal) && */ 
+    !isTransient(modVal) && !isStatic(modVal)
   }
 }
