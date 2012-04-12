@@ -29,8 +29,8 @@ object WriteTake extends App {
   val iterations = IntegerArgument(args, 1000)
 
   val space: Fly = FlyFinder.find() match {
-    case Some(fly) => fly
-    case None => {
+    case Some(fly) ⇒ fly
+    case None ⇒ {
       System.err.println("Failed to find a Fly Server running on the local network")
       throw new RuntimeException()
     }

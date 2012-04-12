@@ -22,18 +22,18 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package com.zink.scala.fly.example
 
 object Timing {
-  
-  def apply(name: String)(block: => Unit) {
+
+  def apply(name: String)(block: ⇒ Unit) {
     apply(name, 1)(block)
   }
 
-  def apply(name: String, iterations: Int)(block: => Unit) {
+  def apply(name: String, iterations: Int)(block: ⇒ Unit) {
     println(name)
     var count = 0
     val start = System.currentTimeMillis()
     while (count < iterations) {
-     block
-     count += 1
+      block
+      count += 1
     }
     val end = System.currentTimeMillis()
     val timeInSeconds = (end - start) / 1000.0F

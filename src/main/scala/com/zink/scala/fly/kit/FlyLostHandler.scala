@@ -1,5 +1,5 @@
 package com.zink.scala.fly.kit
 
 trait FlyLostHandler {
-	def lost(rep:FlyServerRep)
+  def lost(rep: FlyServerRep)
 }

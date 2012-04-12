@@ -1,6 +1,6 @@
 package com.zink.scala.fly.stub
 
-import java.io.{DataOutputStream, DataInputStream}
+import java.io.{ DataOutputStream, DataInputStream }
 import com.zink.scala.fly.FlyAccessException
 
 object StringCodec {

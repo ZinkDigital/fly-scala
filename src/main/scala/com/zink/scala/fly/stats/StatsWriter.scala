@@ -1,7 +1,7 @@
 package com.zink.scala.fly.stats
 
 import java.io._
-import java.net.{Socket, UnknownHostException}
+import java.net.{ Socket, UnknownHostException }
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -71,13 +71,13 @@ class StatsWriter extends Logging {
         fdos.write(buffer)
       }
     } catch {
-      case ex: UnknownHostException =>
+      case ex: UnknownHostException ⇒
         System.out.println("Could not locate Fly server host " + host)
         logSevere(ex)
-      case ex: IOException => 
+      case ex: IOException ⇒
         System.out.println("I/O error in Fly stats")
         logSevere(ex)
-      case _ =>
+      case _ ⇒
     }
   }
 }

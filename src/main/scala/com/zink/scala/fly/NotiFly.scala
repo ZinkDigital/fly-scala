@@ -6,19 +6,19 @@ import scala.actors.Actor
  * NotiFly is the interface to a Fly notify method - please excuse the pun.
  */
 trait NotiFly extends FlyPrime {
-  
+
   /**
    * @deprecated
    * Don't use this method it will be removed at version 2.0
    */
   def notify(template: AnyRef, handler: Notifiable, leaseTime: Long): Boolean
-  
+
   /**
    * @deprecated
    * Don't use this method it will be removed at version 2.0
    */
-  def notify(template: AnyRef, leaseTime: Long)(block: => Unit): Boolean
-  
+  def notify(template: AnyRef, leaseTime: Long)(block: ⇒ Unit): Boolean
+
   /**
    * @deprecated
    * Don't use this method it will be removed at version 2.0
@@ -39,7 +39,7 @@ trait NotiFly extends FlyPrime {
    *  Use the NotifyLeaseRenewer helper in the examples to periodically renew leases.
    *
    * @param template - the template to match to trigger this notify handler
-   * @param handler - An object that implements the Notifiable interface 
+   * @param handler - An object that implements the Notifiable interface
    * @param leaseTime - The time in milliseconds the template will live in the Space
    * @return boolean - Setup OK
    *
@@ -56,10 +56,10 @@ trait NotiFly extends FlyPrime {
    *  </pre>
    * @param template - the template to match that will result in the closure being executed
    * @param leaseTime - The time in milliseconds the template will live in the Space
-   * @param block - A closure to run when the template is matched 
+   * @param block - A closure to run when the template is matched
    * @return boolean - Setup OK
    */
-  def notifyWrite(template: AnyRef, leaseTime: Long)(block: => Unit): Boolean
+  def notifyWrite(template: AnyRef, leaseTime: Long)(block: ⇒ Unit): Boolean
 
   /**
    *  Notify the supplied actor when the template is matched.
@@ -71,30 +71,29 @@ trait NotiFly extends FlyPrime {
    * @return boolean - Setup OK
    */
   def notifyWrite(template: AnyRef, leaseTime: Long, actor: Actor): Boolean
-  
 
-   /**
+  /**
    * The notifyTake method sets up a template object in the Fly Space.
-   * If an object is taken from the Space in the lifetime of the 
-   * notify template that matches the template, then the method 
-   * templateMatched() will be called in the object that implements 
+   * If an object is taken from the Space in the lifetime of the
+   * notify template that matches the template, then the method
+   * templateMatched() will be called in the object that implements
    * the interface NotifyHandler.
-   * 
-   * Take care when setting up notify templates; a large number of 
+   *
+   * Take care when setting up notify templates; a large number of
    * pending notifies can impede 'take' performance in the space.
    * Set the lease of the notify template to a reasonable time and renew
    * the template lease periodically.
-   * 
+   *
    * Use the NotifyLeaseRenewer helper in the examples to periodically renew leases.
-   * 
+   *
    * @param template - the template to match to trigger this notify
-   * @param handler - An object that implements the Notifiable trait 
+   * @param handler - An object that implements the Notifiable trait
    * @param leaseTime - The time in milliseconds the template will live in the Space
    * @return boolean - Setup OK
-   *  
+   *
    */
-  def notifyTake(template:AnyRef, handler:Notifiable, leaseTime:Long):Boolean
-  
+  def notifyTake(template: AnyRef, handler: Notifiable, leaseTime: Long): Boolean
+
   /**
    *  Call a closure when an object matching the template is taken from the space.
    *  For example:
@@ -105,10 +104,10 @@ trait NotiFly extends FlyPrime {
    *  </pre>
    * @param template - the template to match that will result in the closure being executed
    * @param leaseTime - The time in milliseconds the template will live in the Space
-   * @param block - A closure to run when the template is matched 
+   * @param block - A closure to run when the template is matched
    * @return boolean - Setup OK
    */
-  def notifyTake(template: AnyRef, leaseTime: Long)(block: => Unit): Boolean
+  def notifyTake(template: AnyRef, leaseTime: Long)(block: ⇒ Unit): Boolean
 
   /**
    * Notify the supplied actor an object matching the template is taken from the space.
@@ -120,5 +119,5 @@ trait NotiFly extends FlyPrime {
    * @return boolean - Setup OK
    */
   def notifyTake(template: AnyRef, leaseTime: Long, actor: Actor): Boolean
- 
+
 }

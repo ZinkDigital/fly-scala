@@ -31,12 +31,12 @@ object Notification extends App {
   val LEASE = 1 * 1000L;
 
   val fly = FlyFinder.find() match {
-    case None => {
+    case None ⇒ {
       System.err.println("Failed to find a Fly Server running on the local network")
       System.exit(1)
       null
     }
-    case Some(x) => x
+    case Some(x) ⇒ x
   }
 
   println("Setting up notify handlers")
@@ -80,7 +80,7 @@ object Notification extends App {
     val myActor = actor {
       loop {
         react {
-          case FlyPrime.ACTOR_MESSAGE =>
+          case FlyPrime.ACTOR_MESSAGE ⇒
             println("Actor received a message!")
         }
       }

@@ -15,7 +15,7 @@ trait MultiFly extends FlyPrime {
    *
    * @param entries - The object to put in the Space
    * @param lease - The time in milliseconds the objects will live in the Space
-   * @return leaseTime - The space can return a shorter lease than the requested 
+   * @return leaseTime - The space can return a shorter lease than the requested
    *  lease time. To be sure that your object has been leased for the given time
    *  check that the returned lease is the same as the requested lease.
    */
@@ -35,7 +35,7 @@ trait MultiFly extends FlyPrime {
    *  If on the other hand the match limit is 200 and the space contains only
    *  135 matching entries then all 135 entires will be returned.
    *
-   * @param template - Template to match 
+   * @param template - Template to match
    * @param matchLimit - The upper limit of matched objects to return
    * @return A collection of objects that have been matched or an empty Iterable if there are no matches
    */
@@ -62,9 +62,9 @@ trait MultiFly extends FlyPrime {
    *  This method is functionally equivalent to the more simple readMany method with
    *  the ignore parameter set to 0.
    *
-   * @param template - Template to match 
+   * @param template - Template to match
    * @param matchLimit - The upper limit of matched objects to return
-   * @param ignoreInitialMatches - The number of initial matches to ignore 
+   * @param ignoreInitialMatches - The number of initial matches to ignore
    *   before starting to return objects
    * @return A collection of objects that have been matched or empty if there are no matches
    */
@@ -84,7 +84,7 @@ trait MultiFly extends FlyPrime {
    *  If on the other hand the match limit is 200 and the space contains only
    *  135 matching entries then all 135 entires will be returned.
    *
-   * @param template - Template to match 
+   * @param template - Template to match
    * @param matchLimit - The upper limit of matched objects to return
    * @return A collection of objects that have been matched or empty if there are no matches
    */

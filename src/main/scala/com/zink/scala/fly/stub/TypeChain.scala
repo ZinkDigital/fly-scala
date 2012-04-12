@@ -66,17 +66,17 @@ class TypeChain(remoter: Remoter, fieldCodec: FieldCodec) extends Logging {
   def writeObject(outStream: DataOutputStream, obj: AnyRef) {
     writeIDObject(outStream, obj, None)
   }
-  
+
   def writeIDObject(outStream: DataOutputStream, obj: AnyRef, id: Option[UUID]) {
     val bridge = bridges.get(obj.getClass).get
     if (bridge.evolutionResponse == 0) {
       outStream.writeInt(bridge.hostLayout.infos.size)
-      
-      id.foreach { theId =>
-        outStream.writeLong(theId.getMostSignificantBits());
-        outStream.writeLong(theId.getLeastSignificantBits());
+
+      id.foreach { theId ⇒
+        outStream.writeLong(theId.getMostSignificantBits())
+        outStream.writeLong(theId.getLeastSignificantBits())
       }
-      
+
       forEachField(obj, field ⇒ objCodec.writeObject(outStream, field.get(obj)))
 
       outStream.flush()

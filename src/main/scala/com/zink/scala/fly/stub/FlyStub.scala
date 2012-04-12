@@ -23,10 +23,10 @@ import com.zink.scala.fly.NotifyHandlerReturningEntry
  *  FlyStub delegates to <code>MethodCodec</code> for all operations
  *  except <code>writeMany</code> and <code>retrieve</code>.
  */
-class FlyStub(codec:MethodCodec) extends Fly with Logging {
-  
-  def this(address:InetAddress, fieldCodec:FieldCodec) = this(new MethodCodec(address, fieldCodec)) 
-  def this(hostname:String, fieldCodec:FieldCodec) = this(new MethodCodec(hostname, fieldCodec)) 
+class FlyStub(codec: MethodCodec) extends Fly with Logging {
+
+  def this(address: InetAddress, fieldCodec: FieldCodec) = this(new MethodCodec(address, fieldCodec))
+  def this(hostname: String, fieldCodec: FieldCodec) = this(new MethodCodec(hostname, fieldCodec))
 
   private[this] val sampleTime = 100L
 
@@ -40,7 +40,7 @@ class FlyStub(codec:MethodCodec) extends Fly with Logging {
    * @param timeout the timeout
    * @param method the MethodCodec method to use to retrieve the object. Either take or read
    */
-  private[this] def retrieve[T<:AnyRef](template: T, timeout: Long, method: (T, Long) => Option[T]): Option[T] = {
+  private[this] def retrieve[T <: AnyRef](template: T, timeout: Long, method: (T, Long) ⇒ Option[T]): Option[T] = {
     val nyquist = math.min(timeout + 1L >> 1, sampleTime)
     waitUpTo(timeout, nyquist).untilSome(method(template, 0L))
   }
@@ -55,50 +55,53 @@ class FlyStub(codec:MethodCodec) extends Fly with Logging {
    *  to the space in turn.
    * @return the lease of the last entry written
    */
-  def writeMany(entries: Iterable[AnyRef], lease: Long): Long = (0L /: entries){(previousLease, nextEntry) => codec.write(nextEntry, lease)}
+  def writeMany(entries: Iterable[AnyRef], lease: Long): Long = (0L /: entries) { (previousLease, nextEntry) ⇒ codec.write(nextEntry, lease) }
 
   def readMany[T <: AnyRef](template: T, matchLimit: Long): Iterable[T] = codec.readMany(template, matchLimit, 0L)
 
-  def readMany[T <: AnyRef](template: T, matchLimit: Long, ignoreInitialMatches: Long): Iterable[T] 
-    = codec.readMany(template, matchLimit, ignoreInitialMatches)
+  def readMany[T <: AnyRef](template: T, matchLimit: Long, ignoreInitialMatches: Long): Iterable[T] = codec.readMany(template, matchLimit, ignoreInitialMatches)
 
   def takeMany[T <: AnyRef](template: T, matchLimit: Long): Iterable[T] = codec.takeMany(template, matchLimit)
-  
+
   @deprecated("This will be removed in Fly 2", "1.x")
   def notify(template: AnyRef, leaseTime: Long, actor: Actor): Boolean = notifyWrite(template, leaseTime, actor)
-  
+
   @deprecated("This will be removed in Fly 2", "1.x")
   def notify(template: AnyRef, handler: Notifiable, leaseTime: Long): Boolean = notifyWrite(template, handler, leaseTime)
-  
+
   @deprecated("This will be removed in Fly 2", "1.x")
-  def notify(template: AnyRef, leaseTime: Long)(block: => Unit): Boolean = notifyWrite(template, leaseTime)(block)
-  
+  def notify(template: AnyRef, leaseTime: Long)(block: ⇒ Unit): Boolean = notifyWrite(template, leaseTime)(block)
+
   def notifyWrite(template: AnyRef, handler: Notifiable, leaseTime: Long): Boolean = handler match {
-    case h:NotifyHandler => notifyWrite(template, leaseTime) {h.templateMatched()}
-    case h:NotifyHandlerReturningEntry => notifyWrite(template, leaseTime, actor {
-      loop { react {
-          case Some(matched:AnyRef) => h templateMatched matched
-      }}
+    case h: NotifyHandler ⇒ notifyWrite(template, leaseTime) { h.templateMatched() }
+    case h: NotifyHandlerReturningEntry ⇒ notifyWrite(template, leaseTime, actor {
+      loop {
+        react {
+          case Some(matched: AnyRef) ⇒ h templateMatched matched
+        }
+      }
     }, true)
   }
 
-  def notifyWrite(template: AnyRef, leaseTime: Long)(block: => Unit): Boolean = notifyWrite(template, leaseTime, actor {
-      loop { react {
-          case FlyPrime.ACTOR_MESSAGE => block
-      }}
-    }, false)
-  
+  def notifyWrite(template: AnyRef, leaseTime: Long)(block: ⇒ Unit): Boolean = notifyWrite(template, leaseTime, actor {
+    loop {
+      react {
+        case FlyPrime.ACTOR_MESSAGE ⇒ block
+      }
+    }
+  }, false)
+
   def notifyWrite(template: AnyRef, leaseTime: Long, actor: Actor): Boolean = notifyWrite(template, leaseTime, actor, false)
-  
-  private[this] def notifyWrite(template: AnyRef, leaseTime: Long, actor: Actor, returnsValue:Boolean): Boolean = codec.notifyWrite(template, leaseTime, actor, returnsValue)
-  
+
+  private[this] def notifyWrite(template: AnyRef, leaseTime: Long, actor: Actor, returnsValue: Boolean): Boolean = codec.notifyWrite(template, leaseTime, actor, returnsValue)
+
   def notifyTake(template: AnyRef, leaseTime: Long, actor: Actor): Boolean = unsupported
-  
+
   def notifyTake(template: AnyRef, handler: Notifiable, leaseTime: Long): Boolean = unsupported
 
-  def notifyTake(template: AnyRef, leaseTime: Long)(block: => Unit): Boolean = unsupported
+  def notifyTake(template: AnyRef, leaseTime: Long)(block: ⇒ Unit): Boolean = unsupported
 
   private[this] def unsupported = throw new UnsupportedOperationException("Not supported in this version")
-  
+
   private[this] def sleep(x: Long) = wrapExceptionIfThrown(Thread.sleep(x))
 }

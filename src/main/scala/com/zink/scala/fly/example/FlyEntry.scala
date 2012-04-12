@@ -22,20 +22,20 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package com.zink.scala.fly.example
 
 object FlyEntry {
-  def apply(name:String, reference:BigInt, payloadSize:Int):FlyEntry = {
+  def apply(name: String, reference: BigInt, payloadSize: Int): FlyEntry = {
     val f = new FlyEntry(name, reference)
     f.setPayloadOfSize(payloadSize)
     f
   }
 }
 
-class FlyEntry(var name:String = null, var reference:BigInt = null, var payload:String = null) {
-	
+class FlyEntry(var name: String = null, var reference: BigInt = null, var payload: String = null) {
+
   /**
    * This constructor is needed so that the class can be instantiated by reflection
    */
   def this() = this(name = null, reference = null, payload = null)
-  
+
   override def toString: String = {
     val sb = new StringBuilder(128)
     sb.append("Name :")
@@ -50,10 +50,9 @@ class FlyEntry(var name:String = null, var reference:BigInt = null, var payload:
     sb.toString()
   }
 
-
   def setPayloadOfSize(payloadSize: Int) {
     val sb = new StringBuilder(payloadSize)
-    for (i <- 0 until payloadSize) {
+    for (i ← 0 until payloadSize) {
       sb.append('z')
     }
     payload = sb.toString()

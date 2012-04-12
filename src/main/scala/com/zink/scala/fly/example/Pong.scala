@@ -36,23 +36,23 @@ object Pong extends App {
   println("Ready to play " + shots + " shots")
 
   val fly = FlyFinder.find() match {
-    case None => {
+    case None ⇒ {
       System.err.println("Failed to find a Fly Server running on the local network")
       System.exit(1)
       null
     }
-    case Some(x) => x
+    case Some(x) ⇒ x
   }
 
   val template = new Ball("Ping")
 
   fly.take(template, 0L) match {
-    case None => {
+    case None ⇒ {
       println("No ball in play")
       serveBall(fly)
       println("Served Ball - Please start a Ping")
     }
-    case Some(gameBall) => {
+    case Some(gameBall) ⇒ {
       System.out.println("Received ball - game on!")
       returnBall(fly, gameBall)
     }
@@ -61,10 +61,10 @@ object Pong extends App {
   var myShots = 1
   while (myShots < shots) {
     fly.take(template, 0L) match {
-      case None => {
+      case None ⇒ {
         Thread.sleep(10)
       }
-      case Some(ball) => {
+      case Some(ball) ⇒ {
         returnBall(fly, ball)
         myShots += 1
         if (myShots % 10 == 0) print(".")

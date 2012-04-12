@@ -6,7 +6,7 @@ import java.net.Socket
 import com.zink.scala.fly.stub.StringCodec._
 
 object StatsDecoder {
-	val statsOp: Array[Byte] = Array(0xfa.toByte, 0xb1.toByte, 0x0.toByte, 0x09.toByte)
+  val statsOp: Array[Byte] = Array(0xfa.toByte, 0xb1.toByte, 0x0.toByte, 0x09.toByte)
 }
 
 class StatsDecoder {
@@ -23,5 +23,5 @@ class StatsDecoder {
     getStats(dis)
   }
 
-  def getStats(dis: DataInputStream): Seq[StatsBean] = for (i <- 0 until dis.readLong.toInt) yield StatsBean(dis)
+  def getStats(dis: DataInputStream): Seq[StatsBean] = for (i ← 0 until dis.readLong.toInt) yield StatsBean(dis)
 }

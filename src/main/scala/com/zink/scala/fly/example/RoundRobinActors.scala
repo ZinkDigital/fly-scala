@@ -54,10 +54,10 @@ object RoundRobinActors extends App {
     val anActor = actor {
       loop {
         react {
-          case FlyPrime.ACTOR_MESSAGE => fly.take(template, 0L).map(passBall(_, name, next))
+          case FlyPrime.ACTOR_MESSAGE ⇒ fly.take(template, 0L).map(passBall(_, name, next))
 
           // we've been asked to start the game so put a ball in the space
-          case "Go"                   => fly.write(new Ball(name, 1), 10 * 1000L)
+          case "Go"                   ⇒ fly.write(new Ball(name, 1), 10 * 1000L)
         }
       }
     }
@@ -74,12 +74,12 @@ object RoundRobinActors extends App {
 
   def findFly(): Fly = {
     FlyFinder.find() match {
-      case None => {
+      case None ⇒ {
         System.err.println("Failed to find a Fly Server running on the local network")
         System.exit(1)
         null
       }
-      case Some(x) => x
+      case Some(x) ⇒ x
     }
   }
 }

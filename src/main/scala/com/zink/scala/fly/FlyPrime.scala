@@ -16,7 +16,8 @@ object FlyPrime {
   val WRITE = 3
   val NOTIFY = 4
 
-  /**although may not ever make any sense to contact the
+  /**
+   * although may not ever make any sense to contact the
    *   server it is reserved in the 'namespace' anyway
    */
   val SNAPSHOT = 5
@@ -25,21 +26,21 @@ object FlyPrime {
   val TAKE_MANY = 7
   val WRITE_MANY = 8
   val STATS = 9
-  
+
   val NOTIFY_WRITE = 20
-  val NOTIFY_TAKE = 21 
+  val NOTIFY_TAKE = 21
 
   val NOTIFY_WRITE_OBJECT = 22
   val NOTIFY_TAKE_OBJECT = 23
-  
+
   val NOTIFY_SIMPLE = -1L
   val NOTIFY_WITH_OBJECT = -2L
 
   val ACTOR_MESSAGE = "Template matched"
-  
+
   val DEFAULT_HOST = "localhost"
   val FLY_PORT = 4396
-  
+
   val DEFAULT_BUFFER_SIZE = 1024
 }
 
@@ -62,7 +63,7 @@ trait FlyPrime {
    *
    * @param entry - The  object to put in the FlyPrime
    * @param leaseTime - The time in milliseconds the object will live in the Space
-   * @return leaseTime - The space can return a shorter lease than the requested 
+   * @return leaseTime - The space can return a shorter lease than the requested
    *   lease time. To be sure that your object has been leased for the given time
    *   check that the returned lease is the same as the requested lease.
    */
@@ -79,7 +80,7 @@ trait FlyPrime {
    *
    * @param template - The object template to match in the space.
    * @param waitTime - Time in milliseconds to wait before the object is matched.
-   * @return The Some(object) that has been matched or None if the template has not been 
+   * @return The Some(object) that has been matched or None if the template has not been
    *   matched in the given wait time.
    */
   def read[T <: AnyRef](template: T, waitTime: Long): Option[T]
@@ -104,7 +105,7 @@ trait FlyPrime {
    *   take method.
    *
    *
-   * @param template object 
+   * @param template object
    * @return snapshot object
    */
   def snapshot(template: AnyRef): AnyRef

@@ -22,10 +22,10 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package com.zink.scala.fly.example
 
 class Ball(var player: String = null, var batted: BigInt = null) {
-	
-	/**
-	 * This is needed for reflectively creating an instance
-	 */
-	def this() = this(player = null)
+
+  /**
+   * This is needed for reflectively creating an instance
+   */
+  def this() = this(player = null)
 }
 

@@ -24,7 +24,7 @@ package com.zink.scala.fly.example
 import com.zink.scala.fly._
 
 class CallbackWithReturningEntry extends NotifyHandlerReturningEntry {
-  def templateMatched(entry:AnyRef) {
+  def templateMatched(entry: AnyRef) {
     println("Template Matched with " + entry)
   }
 }

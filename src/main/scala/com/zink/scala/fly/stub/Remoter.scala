@@ -59,6 +59,7 @@ class Remoter(socket: Socket) {
   }
 
   def readLong(): Long = dataInputStream.readLong
+  
   def readInt(): Int = dataInputStream.readInt
 
   def readString(): String = StringCodec.readString(dataInputStream)

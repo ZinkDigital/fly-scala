@@ -8,7 +8,7 @@ object StatsPrinter {
 
   def writeStats(beans: Seq[StatsBean]) {
     val columnWidth = nameColumnWidth(beans)
-    for (bean <- beans) {
+    for (bean ← beans) {
       print(pad(bean.typeName, columnWidth))
       print(bean.writes)
       print("\t" + bean.totalReads)
@@ -19,5 +19,5 @@ object StatsPrinter {
 
   def pad(s: String, width: Int): String = s + " " * (width - s.length)
 
-  private def nameColumnWidth(beans: Seq[StatsBean]): Int = (0 /: beans){(m: Int, bean: StatsBean) => m.max(bean.typeName.length())} + 4
+  private def nameColumnWidth(beans: Seq[StatsBean]): Int = (0 /: beans) { (m: Int, bean: StatsBean) ⇒ m.max(bean.typeName.length()) } + 4
 }

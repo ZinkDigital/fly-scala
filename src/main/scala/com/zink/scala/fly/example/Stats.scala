@@ -44,14 +44,14 @@ object Stats extends App {
 
     while (true) {
       statser.stats(socket) match {
-        case Nil =>
-        case beans =>
+        case Nil ⇒
+        case beans ⇒
           StatsPrinter.writeHeader(beans)
           StatsPrinter.writeStats(beans)
       }
       Thread.sleep(sleep)
     }
   } catch {
-    case ex => println("Stats connection broken :" + ex.getMessage)
+    case ex ⇒ println("Stats connection broken :" + ex.getMessage)
   }
 }
