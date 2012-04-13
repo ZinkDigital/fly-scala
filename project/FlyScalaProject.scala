@@ -13,7 +13,7 @@ object BuildSettings {
     organization := "com.flyobjectspace",
     version := "2.0.0-SNAPSHOT",
     scalaVersion := "2.9.1",
-    javaOptions ++= Seq("-Xmx1G", "-Xss4m", "-server"),
+    javaOptions ++= Seq("-Xmx256m", "-Xss4m", "-server"),
 
     testOptions in Test ++= Seq(Tests.Argument("junitxml", "html", "console")),
 
@@ -59,7 +59,7 @@ object Publishing {
   def publishSettings: Seq[Setting[_]] = Seq(
     publishMavenStyle := true,
     publishArtifact in Test := false,
-    pomIncludeRepository := { x ⇒ false },
+    pomIncludeRepository := { _ ⇒ false },
 
     publishTo <<= version { v: String ⇒
       val nexus = "https://oss.sonatype.org/"
@@ -77,6 +77,10 @@ object Publishing {
           <distribution>repo</distribution>
         </license>
       </licenses>
+      <scm>
+        <url>git@github.com:fly-object-space/fly-scala.git</url>
+        <connection>scm:git:git@github.com:fly-object-space/fly-scala.git</connection>
+      </scm>
       <description>
         Fly Scala is a scala client library for working with a Fly Server.
       Fly is an object space server that is specifically written to provide
@@ -90,8 +94,8 @@ object Publishing {
         <developer>
           <id>cjw</id>
           <name>Channing Walton</name>
-          <email>channing [dot] walton [at] casualmiracles [dot] com</email>
-          <organization>Casual Miracles Ltd</organization>
+          <email>channing [dot] walton [at] underscoreconsulting [dot] com</email>
+          <organization>Underscore Consulting Ltd</organization>
         </developer>
         <developer>
           <id>nw</id>
