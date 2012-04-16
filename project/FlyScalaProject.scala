@@ -12,7 +12,7 @@ object BuildSettings {
   val buildSettings: Seq[Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
     organization := "com.flyobjectspace",
     version := "2.0.0-SNAPSHOT",
-    scalaVersion := "2.9.1",
+    scalaVersion := "2.9.2",
     javaOptions ++= Seq("-Xmx256m", "-Xss4m", "-server"),
 
     testOptions in Test ++= Seq(Tests.Argument("junitxml", "html", "console")),
