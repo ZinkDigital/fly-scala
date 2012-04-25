@@ -6,3 +6,4 @@ target
 .project
 .cache
 project/target
+bin
