@@ -4,8 +4,8 @@
 # Author: Paul Phillips <paulp@typesafe.com>
 
 # todo - make this dynamic
-declare -r sbt_release_version=0.11.2
-declare -r sbt_snapshot_version=0.12.0-SNAPSHOT
+declare -r sbt_release_version=0.11.3
+declare -r sbt_snapshot_version=0.13.0-SNAPSHOT
 
 unset sbt_jar sbt_dir sbt_create sbt_snapshot
 unset scala_version java_home sbt_explicit_version
@@ -148,7 +148,8 @@ execRunner () {
 sbt_groupid () {
   case $(sbt_version) in
         0.7.*) echo org.scala-tools.sbt ;;
-    0.1[01].*) echo org.scala-tools.sbt ;;
+       0.10.*) echo org.scala-tools.sbt ;;
+    0.11.[12]) echo org.scala-tools.sbt ;;
             *) echo org.scala-sbt ;;
   esac
 }
@@ -169,7 +170,7 @@ make_release_url () {
   make_url $(sbt_groupid) releases $(sbt_version)
 }
 
-# argument is e.g. 0.12.0-SNAPSHOT
+# argument is e.g. 0.13.0-SNAPSHOT
 # finds the actual version (with the build id) at artifactory
 make_snapshot_url () {
   for ver in $(sbt_artifactory_list); do
@@ -204,7 +205,7 @@ download_url () {
 
   mkdir -p $(dirname "$jar") && {
     if which curl >/dev/null; then
-      curl --silent "$url" --output "$jar"
+      curl --fail --silent "$url" --output "$jar"
     elif which wget >/dev/null; then
       wget --quiet -O "$jar" "$url"
     fi

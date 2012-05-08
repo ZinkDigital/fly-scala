@@ -11,7 +11,9 @@ The tests require a local fly server.
 In sbt, type ~test for continuous testing as you touch and save files
 
 Publishing to Sonatype
-==========================
+======================
+
+Cross build by prefixing stuff with '+', eg + publish, + package
 
 Deploy snapshot artifacts into repository https://oss.sonatype.org/content/repositories/snapshots
 Deploy release artifacts into the staging repository https://oss.sonatype.org/service/local/staging/deploy/maven2

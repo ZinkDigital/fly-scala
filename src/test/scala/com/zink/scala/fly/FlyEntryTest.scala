@@ -21,6 +21,18 @@ class FlyEntryTest extends SpecificationWithJUnit {
     fly.take(entry, 0) must beSome[EmptyEntry]
   }
   
+  "Entry with Long.MaxValue timeout" in {
+    // set up the empty entry
+    val leaseTime = Long.MaxValue
+    val entry = new EmptyEntry()
+       
+    val lease = fly.write(entry, leaseTime)
+    lease mustEqual leaseTime
+       
+    // then read it back 
+    fly.take(entry, 0) must beSome[EmptyEntry]
+  }
+  
   
   "Exotic Entry" in {
         

@@ -41,7 +41,7 @@ class FlyStub(codec: MethodCodec) extends Fly with Logging {
    * @param method the MethodCodec method to use to retrieve the object. Either take or read
    */
   private[this] def retrieve[T <: AnyRef](template: T, timeout: Long, method: (T, Long) ⇒ Option[T]): Option[T] = {
-    val nyquist = math.min(timeout + 1L >> 1, sampleTime)
+    val nyquist = math.min(math.max(0, timeout + 1L >> 1), sampleTime)
     waitUpTo(timeout, nyquist).untilSome(method(template, 0L))
   }
 
