@@ -12,9 +12,8 @@ object BuildSettings {
   val buildSettings: Seq[Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
     organization := "com.flyobjectspace",
     version := "2.0.0-SNAPSHOT",
-    scalaVersion := "2.9.1",
+    scalaVersion := "2.9.2",
     crossScalaVersions := Seq("2.9.1", "2.9.2"),
-    javaOptions ++= Seq("-Xmx256m", "-Xss4m", "-server"),
 
     testOptions in Test ++= Seq(Tests.Argument("junitxml", "html", "console")),
 
@@ -39,11 +38,11 @@ object BuildSettings {
 
 object Dependencies {
   val specs2 = Seq(
-    "org.specs2" %% "specs2" % "1.9" % "test->default",
-    "org.mockito" % "mockito-all" % "1.9.0" % "test->default")
+    "org.specs2" %% "specs2" % "1.12.3" % "test",
+    "org.mockito" % "mockito-all" % "1.9.5" % "test->default")
 
-  val pegdown = "org.pegdown" % "pegdown" % "1.1.0" % "test"
-  val junit = "junit" % "junit" % "4.10" % "test"
+  val pegdown = "org.pegdown" % "pegdown" % "1.2.0" % "test"
+  val junit = "junit" % "junit" % "4.11" % "test"
 
 }
 
@@ -82,7 +81,7 @@ object Publishing {
         <connection>scm:git:git@github.com:fly-object-space/fly-scala.git</connection>
       </scm>
       <description>
-      Fly Scala is a scala client library for working with a Fly Server.
+        Fly Scala is a scala client library for working with a Fly Server.
       Fly is an object space server that is specifically written to provide
       lightweight object based messaging between computers running on a network.
       This distribution does not contain the server, please go to

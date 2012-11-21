@@ -1,8 +1,7 @@
 Getting Started
 ===============
 
-run the sbt script (from https://github.com/paulp/sbt-extras) which will get a recent version of sbt and start it.
-
+You need sbt. I recommend you get sbt.sh from https://github.com/paulp/sbt-extras.
 
 Testing
 =======

@@ -51,7 +51,6 @@ class MethodCodec(remoter: Remoter, fieldCodec: FieldCodec) extends Logging {
   private[this] def retrieve[T <: AnyRef](template: T, timeout: Long, methodCodecHeader: Int): Option[T] = remoterOp {
     writeRetrieveHeader(template, methodCodecHeader)
     dos.writeLong(timeout)
-
     val size = remoter.sendOperation(bos.toByteArray)
     if (size <= 0) None else typeChain.readObject(size, theClass(template))
   }

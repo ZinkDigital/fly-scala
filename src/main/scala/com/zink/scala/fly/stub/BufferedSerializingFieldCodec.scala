@@ -1,9 +1,7 @@
 package com.zink.scala.fly.stub
 
-import com.zink.scala.fly.{ FieldCodec, FlyPrime }
-import java.io.ByteArrayOutputStream
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
+import com.zink.scala.fly.{FieldCodec, FlyPrime}
+import java.io.{ByteArrayOutputStream, ObjectInputStream, ObjectOutputStream}
 import java.nio.ByteBuffer
 
 class BufferedSerializingFieldCodec extends FieldCodec {
@@ -27,5 +25,4 @@ class BufferedSerializingFieldCodec extends FieldCodec {
     bbis.switchBuffer(ByteBuffer.wrap(fieldBytes))
     Option(ois.readObject)
   }
-
 }
