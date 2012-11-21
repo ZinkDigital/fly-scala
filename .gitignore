@@ -7,3 +7,4 @@ target
 .cache
 project/target
 bin
+.ensime
