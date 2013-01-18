@@ -49,7 +49,7 @@ class MulticastListener(repHandler: FlyRepHandler) extends Callable[Any] {
       multicastSocket.leaveGroup(multicastAddr);
     } catch {
       // doesn't ever get here - apparently
-      case ex ⇒ throw new FlyAccessException(ex);
+      case ex: Exception ⇒ throw new FlyAccessException(ex);
     } finally {
       multicastSocket.close();
     }

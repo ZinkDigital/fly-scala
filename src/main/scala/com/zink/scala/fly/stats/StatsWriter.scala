@@ -74,10 +74,9 @@ class StatsWriter extends Logging {
       case ex: UnknownHostException ⇒
         System.out.println("Could not locate Fly server host " + host)
         logSevere(ex)
-      case ex: IOException ⇒
-        System.out.println("I/O error in Fly stats")
+      case ex: Exception ⇒
+        System.out.println("Error in Fly stats")
         logSevere(ex)
-      case _ ⇒
     }
   }
 }

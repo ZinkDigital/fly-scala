@@ -40,7 +40,7 @@ private class FlyFinder(fieldCodec: FieldCodec = new SerializingFieldCodec) {
       // either something is found or we ran out of time
       if (!reps.isEmpty) Some(new FlyStub(reps.next().flyAddr, fieldCodec)) else None
     } catch {
-      case e ⇒ throw new FlyAccessException(e)
+      case e: Exception ⇒ throw new FlyAccessException(e)
     } finally {
       cache.terminate()
     }
@@ -79,7 +79,7 @@ private class FlyFinder(fieldCodec: FieldCodec = new SerializingFieldCodec) {
       }
       fly
     } catch {
-      case e ⇒ throw new FlyAccessException(e)
+      case e: Exception ⇒ throw new FlyAccessException(e)
     } finally {
       cache.terminate()
     }

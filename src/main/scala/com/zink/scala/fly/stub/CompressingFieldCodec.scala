@@ -39,7 +39,7 @@ class CompressingFieldCodec extends FieldCodec {
       baos.close()
       baos.toByteArray
     } catch {
-      case _ ⇒ throw new FlyAccessException("Compression failed in field codec")
+      case _: Exception ⇒ throw new FlyAccessException("Compression failed in field codec")
     }
   }
 
@@ -56,7 +56,7 @@ class CompressingFieldCodec extends FieldCodec {
       }
       bos.toByteArray
     } catch {
-      case _ ⇒ throw new FlyAccessException("Decompression failed in field codec")
+      case _: Exception ⇒ throw new FlyAccessException("Decompression failed in field codec")
     }
   }
 }

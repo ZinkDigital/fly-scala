@@ -12,6 +12,6 @@ object FlyFactory {
     try {
       new FlyStub(host, fieldCodec)
     } catch {
-      case e ⇒ throw new IllegalArgumentException("No Fly server running on " + host)
+      case e: Exception ⇒ throw new IllegalArgumentException("No Fly server running on " + host)
     }
 }

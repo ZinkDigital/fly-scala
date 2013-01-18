@@ -52,6 +52,6 @@ object Stats extends App {
       Thread.sleep(sleep)
     }
   } catch {
-    case ex ⇒ println("Stats connection broken :" + ex.getMessage)
+    case ex: Exception ⇒ println("Stats connection broken :" + ex.getMessage)
   }
 }

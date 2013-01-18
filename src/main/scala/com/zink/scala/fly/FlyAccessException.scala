@@ -16,7 +16,7 @@ object FlyAccessException {
     try {
       block
     } catch {
-      case ex ⇒ logger.log(Level.SEVERE, null, ex)
+      case ex: Exception ⇒ logger.log(Level.SEVERE, null, ex)
     }
 }
 

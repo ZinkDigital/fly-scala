@@ -12,8 +12,8 @@ object BuildSettings {
   val buildSettings: Seq[Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
     organization := "com.flyobjectspace",
     version := "2.0.0-SNAPSHOT",
-    scalaVersion := "2.9.2",
-    crossScalaVersions := Seq("2.9.1", "2.9.2"),
+    scalaVersion := "2.10.0",
+    crossScalaVersions := Seq("2.10.0"),
 
     testOptions in Test ++= Seq(Tests.Argument("junitxml", "html", "console")),
 
@@ -38,11 +38,12 @@ object BuildSettings {
 
 object Dependencies {
   val specs2 = Seq(
-    "org.specs2" %% "specs2" % "1.12.3" % "test",
+    "org.specs2" %% "specs2" % "1.13" % "test",
     "org.mockito" % "mockito-all" % "1.9.5" % "test->default")
 
   val pegdown = "org.pegdown" % "pegdown" % "1.2.0" % "test"
   val junit = "junit" % "junit" % "4.11" % "test"
+  val scalaActors = "org.scala-lang" % "scala-actors" % "2.10.0"
 
 }
 
@@ -122,5 +123,5 @@ object FlyScalaBuild extends Build {
   lazy val flyScala = Project(
     "FlyScala",
     file("."),
-    settings = buildSettings ++ publishSettings ++ Seq(resolvers := Seq(Classpaths.typesafeResolver), libraryDependencies ++= specs2 ++ Seq(junit, pegdown)))
+    settings = buildSettings ++ publishSettings ++ Seq(resolvers := Seq(Classpaths.typesafeResolver), libraryDependencies ++= specs2 ++ Seq(junit, pegdown, scalaActors)))
 }

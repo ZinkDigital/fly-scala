@@ -112,7 +112,7 @@ class MethodCodec(remoter: Remoter, fieldCodec: FieldCodec) extends Logging {
     try {
       op
     } catch {
-      case e ⇒ throw new FlyAccessException(e)
+      case e: Exception ⇒ throw new FlyAccessException(e)
     } finally {
       remoter.setMessageComplete()
     }
