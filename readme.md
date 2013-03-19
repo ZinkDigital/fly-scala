@@ -12,6 +12,12 @@ In sbt, type ~test for continuous testing as you touch and save files
 Publishing to Sonatype
 ======================
 
+Make sure you have the sonatype.sbt file with credentials in ~/.sbt/<sbt-version> or in ~/.sbt. It depends on your set up.
+The contents of the file should be:
+  credentials += Credentials("Sonatype Nexus Repository Manager","oss.sonatype.org","username","password")
+
+see http://www.scala-sbt.org/using_sonatype.html for more.
+
 Cross build by prefixing stuff with '+', eg + publish, + package
 
 Deploy snapshot artifacts into repository https://oss.sonatype.org/content/repositories/snapshots
@@ -19,10 +25,6 @@ Deploy release artifacts into the staging repository https://oss.sonatype.org/se
 Promote staged artifacts into repository 'Releases'
 Download snapshot and release artifacts from group https://oss.sonatype.org/content/groups/public
 Download snapshot, release and staged artifacts from staging group https://oss.sonatype.org/content/groups/staging
-
-see http://www.scala-sbt.org/using_sonatype.html
-
-Change your version number in project/build.properties, appending -SNAPSHOT if you want it to go to the snapshot repo.
 
 In sbt, run 'publish'
 
