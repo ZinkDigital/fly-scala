@@ -4,9 +4,9 @@ import java.io._
 import java.net.{ Socket, UnknownHostException }
 import java.text.SimpleDateFormat
 import java.util.Date
-
 import com.zink.scala.fly.kit.Logging
 import com.zink.scala.fly.stub.StringCodec._
+import com.zink.scala.fly.FlyPrime
 
 /**
  *  Stats Writer is a 'low level' tool that can be used with the fly server to
@@ -53,7 +53,7 @@ class StatsWriter extends Logging {
 
       while (true) {
         // write the stats op
-        dos.write(StatsDecoder.statsOp)
+        dos.writeInt(FlyPrime.FLY_HEADER ^ FlyPrime.STATS)
         writeString(dos, EMPTY_STRING)
         val sampleTime = System.currentTimeMillis()
 

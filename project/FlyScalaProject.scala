@@ -37,12 +37,12 @@ object BuildSettings {
 
 object Dependencies {
   val specs2 = Seq(
-    "org.specs2" %% "specs2" % "1.13" % "test",
+    "org.specs2" %% "specs2" % "1.14" % "test",
     "org.mockito" % "mockito-all" % "1.9.5" % "test->default")
 
   val pegdown = "org.pegdown" % "pegdown" % "1.2.0" % "test"
   val junit = "junit" % "junit" % "4.11" % "test"
-  val scalaActors = "org.scala-lang" % "scala-actors" % "2.10.0"
+  val scalaActors = "org.scala-lang" % "scala-actors" % "2.10.1"
 
 }
 
