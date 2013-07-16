@@ -7,12 +7,12 @@ import IO._
 object BuildSettings {
   val packageDist = TaskKey[Unit]("package-dist")
   val dist = TaskKey[Unit]("dist")
-  val flyServerVersion = "2.0-BETA"
+  val flyServerVersion = "2.0"
 
   val buildSettings: Seq[Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
     organization := "com.flyobjectspace",
     version := "2.0.0-SNAPSHOT",
-    scalaVersion := "2.10.1",
+    scalaVersion := "2.10.2",
 
     testOptions in Test ++= Seq(Tests.Argument("junitxml", "html", "console")),
 
@@ -37,12 +37,12 @@ object BuildSettings {
 
 object Dependencies {
   val specs2 = Seq(
-    "org.specs2" %% "specs2" % "1.14" % "test",
+    "org.specs2" %% "specs2" % "2.1" % "test",
     "org.mockito" % "mockito-all" % "1.9.5" % "test->default")
 
   val pegdown = "org.pegdown" % "pegdown" % "1.2.0" % "test"
   val junit = "junit" % "junit" % "4.11" % "test"
-  val scalaActors = "org.scala-lang" % "scala-actors" % "2.10.1"
+  val scalaActors = "org.scala-lang" % "scala-actors" % "2.10.2"
 
 }
 

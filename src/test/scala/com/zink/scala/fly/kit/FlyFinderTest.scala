@@ -14,7 +14,7 @@ class FlyFinderTest extends Specification {
 
     
     "Tags Match" in {
-      new FlyFinder().find(Array { "FlySpace" }) must beSome[Fly]
+      new FlyFinder().find(Array { "FlySpace2" }) must beSome[Fly]
     }
     
     "Tags No Match" in {

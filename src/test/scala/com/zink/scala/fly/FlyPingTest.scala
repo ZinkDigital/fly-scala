@@ -32,11 +32,11 @@ class FlyPingTest extends Specification {
             tag
         }
         tags.size must_== reply.toInt
-        tags.headOption must_== Some("FlySpace")
+        tags.headOption must_== Some("FlySpace2")
     }
 
 	
     "Ping With Pinger" in {
-        new FlyPinger().ping(InetAddress.getByName("localhost")).map(_(0) mustEqual "FlySpace") must_!= None
+        new FlyPinger().ping(InetAddress.getByName("localhost")).map(_(0) mustEqual "FlySpace2") must_!= None
     }
 }
