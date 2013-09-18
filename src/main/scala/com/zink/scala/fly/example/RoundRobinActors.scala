@@ -21,10 +21,11 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.zink.scala.fly.example
 
-import com.zink.scala.fly.{ Fly, FlyPrime }
-import com.zink.scala.fly.kit.FlyFinder
 import scala.actors.Actor
 import scala.actors.Actor._
+
+import com.zink.scala.fly.ScalaFly
+import com.zink.scala.fly.ScalaFly.ACTOR_MESSAGE
 
 /**
  *  This example creates several actors that pass a Ball between them.
@@ -35,7 +36,14 @@ import scala.actors.Actor._
  *  The last actor passes the ball back to the first actor.
  */
 object RoundRobinActors extends App {
-  val fly: Fly = findFly()
+  val fly: ScalaFly = ScalaFly.makeFly match {
+    case None ⇒ {
+      System.err.println("Failed to find a Fly Server running on the local network")
+      System.exit(1)
+      null
+    }
+    case Some(x) ⇒ x
+  }
 
   // create actors, with their name and the name of the actor to pass the ball to
   val mickey = createActor("mickey", "donald")
@@ -54,10 +62,10 @@ object RoundRobinActors extends App {
     val anActor = actor {
       loop {
         react {
-          case FlyPrime.ACTOR_MESSAGE ⇒ fly.take(template, 0L).map(passBall(_, name, next))
+          case ACTOR_MESSAGE ⇒ fly.take(template, 0L).map(passBall(_, name, next))
 
           // we've been asked to start the game so put a ball in the space
-          case "Go"                   ⇒ fly.write(new Ball(name, 1), 10 * 1000L)
+          case "Go"          ⇒ fly.write(new Ball(name, 1), 10 * 1000L)
         }
       }
     }
@@ -70,16 +78,5 @@ object RoundRobinActors extends App {
     println(from + " is passing the ball to " + next + ", the pass count is " + ball.batted)
     Thread.sleep(500)
     fly.write(new Ball(next, ball.batted + 1), 1 * 1000L)
-  }
-
-  def findFly(): Fly = {
-    FlyFinder.find() match {
-      case None ⇒ {
-        System.err.println("Failed to find a Fly Server running on the local network")
-        System.exit(1)
-        null
-      }
-      case Some(x) ⇒ x
-    }
   }
 }

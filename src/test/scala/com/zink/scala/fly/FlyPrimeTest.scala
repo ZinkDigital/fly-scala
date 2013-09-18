@@ -1,18 +1,16 @@
 package com.zink.scala.fly
 
-import com.zink.scala.fly.kit.FlyFactory
-
 import org.specs2.mutable._
 import org.specs2.specification._
 import org.specs2.execute._
 
 class FlyPrimeTest extends Specification {
-	
+
   val HOST = "localhost"
-  val fly = FlyFactory()
+  val fly: ScalaFly = ScalaFly.makeFly().get
   val template = new TestEntry("FlyPrime 1")
 
-  override def is = args(sequential = true) ^ super.is 
+  override def is = args(sequential = true) ^ super.is
 
   "WriteTake" in {
     val entry = MakeTestEntry("FlyPrime 1", BigInt(1), 200)
@@ -43,13 +41,11 @@ class FlyPrimeTest extends Specification {
     fly.take(snapshot, 0L) must beSome(entry)
   }
 
-
   "LargeObject" in {
-      val entry = MakeTestEntry("FlyPrime 1", BigInt(4), 5000)
-      fly.write(entry, 1000L)
-      fly.take(template, 0L) must beSome(entry)
+    val entry = MakeTestEntry("FlyPrime 1", BigInt(4), 5000)
+    fly.write(entry, 1000L)
+    fly.take(template, 0L) must beSome(entry)
   }
-
 
   "WaitingTake" in {
     val entry = MakeTestEntry("FlyPrime 1", BigInt(5), 512)

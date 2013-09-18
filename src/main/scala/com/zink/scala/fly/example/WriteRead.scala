@@ -21,17 +21,19 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.zink.scala.fly.example
 
-import com.zink.scala.fly.kit._
+import com.zink.scala.fly.ScalaFly
 
 object WriteRead extends App {
 
   val iterations = IntegerArgument(args, 1000)
 
-  // a host name has been supplied
-  val space = if (args.length > 1) {
-    FlyFactory(host = args(1))
-  } else {
-    FlyFactory()
+  val fly: ScalaFly = ScalaFly.makeFly match {
+    case None ⇒ {
+      System.err.println("Failed to find a Fly Server running on the local network")
+      System.exit(1)
+      null
+    }
+    case Some(x) ⇒ x
   }
 
   // set up an object to write to the space
@@ -44,7 +46,7 @@ object WriteRead extends App {
   template.payload = null // ditto
 
   Timing("Processing " + iterations + " writes and reads", iterations) {
-    space.write(obj, 1000)
-    space.read(template, 0L)
+    fly.write(obj, 1000)
+    fly.read(template, 0L)
   }
 }

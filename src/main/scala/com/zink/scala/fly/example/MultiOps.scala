@@ -20,13 +20,14 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.zink.scala.fly.example
 
-import com.zink.scala.fly._
-import com.zink.scala.fly.kit.FlyFactory
+import com.zink.fly.Fly
+import com.zink.scala.fly.ScalaFly
 
 object MultiOps extends App {
   val LEASE_TIME = 100 * 1000
 
-  val space = FlyFactory()
+  // NEVER do a get on an Option, except in a demo
+  val space: ScalaFly = ScalaFly.makeFly().get
 
   // Set up a payload size and the number of objects to write and
   // read - tune these for your testing/deployment purposes
@@ -51,7 +52,7 @@ object MultiOps extends App {
     writeReadAndTakeMulti(space, template, entries)
   }
 
-  private def writeReadAndTakeSingle(space: MultiFly, template: FlyEntry, entries: Seq[FlyEntry]) {
+  private def writeReadAndTakeSingle(space: ScalaFly, template: FlyEntry, entries: Seq[FlyEntry]) {
 
     // write the objects
     for (entry ← entries) {
@@ -67,7 +68,7 @@ object MultiOps extends App {
     }
   }
 
-  private def writeReadAndTakeMulti(space: MultiFly, template: FlyEntry, entries: Seq[FlyEntry]) {
+  private def writeReadAndTakeMulti(space: ScalaFly, template: FlyEntry, entries: Seq[FlyEntry]) {
 
     // write the objects
     val lease = space.writeMany(entries, LEASE_TIME)

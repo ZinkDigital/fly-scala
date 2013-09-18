@@ -21,8 +21,8 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.zink.scala.fly.example
 
-import com.zink.scala.fly.FlyPrime
-import com.zink.scala.fly.kit.FlyFinder
+import com.zink.scala.fly.ScalaFly
+import com.zink.fly.FlyPrime
 
 /**
  *  Pong is a player in a game of ping pong, bouncing a Ball instance via the fly space.
@@ -35,7 +35,7 @@ object Pong extends App {
 
   println("Ready to play " + shots + " shots")
 
-  val fly = FlyFinder.find() match {
+  val fly: ScalaFly = ScalaFly.makeFly match {
     case None ⇒ {
       System.err.println("Failed to find a Fly Server running on the local network")
       System.exit(1)
@@ -73,12 +73,12 @@ object Pong extends App {
   }
   println("\nPlayed all my " + myShots + " shots")
 
-  private def serveBall(fly: FlyPrime) {
+  private def serveBall(fly: ScalaFly) {
     val gameBall = new Ball("Pong", BigInt(1))
     fly.write(gameBall, 60 * 1000L)
   }
 
-  private def returnBall(fly: FlyPrime, ball: Ball) {
+  private def returnBall(fly: ScalaFly, ball: Ball) {
     val hitCount = ball.batted.intValue()
     val returned = new Ball("Pong", ball.batted + 1)
     fly.write(returned, 1 * 1000L)

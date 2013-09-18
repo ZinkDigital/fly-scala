@@ -21,7 +21,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.zink.scala.fly.example
 
-import com.zink.scala.fly.NotifyHandler
+import com.zink.fly.NotifyHandler
 
 class CallbackHandler extends NotifyHandler {
   def templateMatched() {
