@@ -50,23 +50,6 @@ class MultiFlyTest extends SpecificationWithJUnit {
       entries.toList.head.reference mustEqual BigInt(0)
     }
 
-    "ignore specified number of entries" in {
-      // now test the ignore parameter of method
-      val ignore = 10
-      val entries = fly.readMany(template, numToRead, ignore)
-
-      entries.size mustEqual numToRead
-      entries.toList.head.reference mustEqual BigInt(ignore)
-    }
-
-    "read too many should return the available instances" in {
-      // try to read more than the list
-      val ignore = 25
-      val entries = fly.readMany(template, numToRead, ignore)
-
-      entries.size mustEqual numEntries - ignore
-      entries.toList.head.reference mustEqual BigInt(ignore)
-    }
   }
 
   "TakeMany" in {

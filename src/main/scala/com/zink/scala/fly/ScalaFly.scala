@@ -24,7 +24,6 @@ case class ScalaFly(fly: Fly) {
 
   def writeMany(entries: Iterable[AnyRef], lease: Long): Long = fly.writeMany(entries.toList.asJava, lease)
   def readMany[T <: AnyRef](template: T, matchLimit: Long): Iterable[T] = fly.readMany(template, matchLimit).asScala
-  def readMany[T <: AnyRef](template: T, matchLimit: Long, ignoreInitialMatches: Long): Iterable[T] = fly.readMany(template, matchLimit, ignoreInitialMatches).asScala
   def takeMany[T <: AnyRef](template: T, matchLimit: Long): Iterable[T] = fly.takeMany(template, matchLimit).asScala
 
   def notifyWrite(template: AnyRef, handler: Notifiable, leaseTime: Long): Boolean = fly.notifyWrite(template, handler, leaseTime)
