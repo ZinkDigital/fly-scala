@@ -7,13 +7,14 @@ import com.zink.fly.Fly
 import com.zink.fly.NotifyHandler
 import com.zink.fly.kit.FlyFactory
 import com.zink.fly.Notifiable
+import com.zink.fly.FieldCodec
+import com.zink.fly.stub.SerializingFieldCodec
 
 object ScalaFly {
 
   val ACTOR_MESSAGE = "message"
 
-  def makeFly() = Option(FlyFactory.makeFly()).map(ScalaFly(_))
-  // TODO - other makeFly methods
+  def makeFly(host: String = "localhost", codec: FieldCodec = new SerializingFieldCodec()) = Option(FlyFactory.makeFly(host, codec)).map(ScalaFly(_))
 }
 
 case class ScalaFly(fly: Fly) {

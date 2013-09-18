@@ -27,14 +27,8 @@ object WriteTake extends App {
 
   val iterations = IntegerArgument(args, 1000)
 
-  val fly: ScalaFly = ScalaFly.makeFly match {
-    case None ⇒ {
-      System.err.println("Failed to find a Fly Server running on the local network")
-      System.exit(1)
-      null
-    }
-    case Some(x) ⇒ x
-  }
+  // NEVER do a get on an Option, except in a demo
+  val fly: ScalaFly = ScalaFly.makeFly().get
 
   // set up an object to write to the space
   val obj = new FlyEntry(name = "Fly 2", reference = BigInt(17))

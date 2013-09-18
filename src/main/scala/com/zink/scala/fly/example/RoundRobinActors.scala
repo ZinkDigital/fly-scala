@@ -36,14 +36,8 @@ import com.zink.scala.fly.ScalaFly.ACTOR_MESSAGE
  *  The last actor passes the ball back to the first actor.
  */
 object RoundRobinActors extends App {
-  val fly: ScalaFly = ScalaFly.makeFly match {
-    case None ⇒ {
-      System.err.println("Failed to find a Fly Server running on the local network")
-      System.exit(1)
-      null
-    }
-    case Some(x) ⇒ x
-  }
+  // NEVER do a get on an Option, except in a demo
+  val fly: ScalaFly = ScalaFly.makeFly().get
 
   // create actors, with their name and the name of the actor to pass the ball to
   val mickey = createActor("mickey", "donald")
