@@ -3,18 +3,15 @@ package com.zink.scala.fly
 import scala.actors.Actor
 import scala.collection.JavaConverters.collectionAsScalaIterableConverter
 import scala.collection.JavaConverters.seqAsJavaListConverter
-import com.zink.fly.Fly
-import com.zink.fly.NotifyHandler
 import com.zink.fly.kit.FlyFactory
-import com.zink.fly.Notifiable
-import com.zink.fly.FieldCodec
+import com.zink.fly._
 import com.zink.fly.stub.SerializingFieldCodec
 
 object ScalaFly {
 
   val ACTOR_MESSAGE = "message"
 
-  def makeFly(host: String = "localhost", codec: FieldCodec = new SerializingFieldCodec()) = Option(FlyFactory.makeFly(host, codec)).map(ScalaFly(_))
+  def makeFly(host: String = "localhost", codec: FieldCodec = new SerializingFieldCodec()): Option[ScalaFly] = Option(FlyFactory.makeFly(host, codec)).map(ScalaFly(_))
 }
 
 case class ScalaFly(fly: Fly) {

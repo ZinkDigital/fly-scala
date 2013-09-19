@@ -26,7 +26,7 @@ Promote staged artifacts into repository 'Releases'
 Download snapshot and release artifacts from group https://oss.sonatype.org/content/groups/public
 Download snapshot, release and staged artifacts from staging group https://oss.sonatype.org/content/groups/staging
 
-In sbt, run 'publish'
+In sbt, run 'publish-signed'
 
 Distribution
 ============
