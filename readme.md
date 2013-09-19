@@ -1,43 +1,65 @@
-Getting Started
-===============
-
-You need sbt. I recommend you get sbt.sh from https://github.com/paulp/sbt-extras.
-
-Testing
-=======
-The tests require a local fly server.
-
-In sbt, type ~test for continuous testing as you touch and save files
-
-Publishing to Sonatype
-======================
-
-Make sure you have the sonatype.sbt file with credentials in ~/.sbt/<sbt-version> or in ~/.sbt. It depends on your set up.
-The contents of the file should be:
-  credentials += Credentials("Sonatype Nexus Repository Manager","oss.sonatype.org","username","password")
-
-see http://www.scala-sbt.org/using_sonatype.html for more.
-
-Cross build by prefixing stuff with '+', eg + publish, + package
-
-Deploy snapshot artifacts into repository https://oss.sonatype.org/content/repositories/snapshots
-Deploy release artifacts into the staging repository https://oss.sonatype.org/service/local/staging/deploy/maven2
-Promote staged artifacts into repository 'Releases'
-Download snapshot and release artifacts from group https://oss.sonatype.org/content/groups/public
-Download snapshot, release and staged artifacts from staging group https://oss.sonatype.org/content/groups/staging
-
-In sbt, run 'publish-signed'
-
-Distribution
-============
-
-In sbt type 'dist' and it will build the dist.zip into target/[scala_version]/fly-[fly version].zip
-
-The dist task expects to find the FlyArchive directory at the same level as FlyScala. It needs this to
-get the server to include in the distribution.
-
-Modifying the Project
-=====================
-Our sbt project file is project/FlyScalaProject.scala (which is just a Scala class).
+# Fly Object Space For Scala
 
 
+Welcome to Fly for Scala!
+
+**Fly** is an Object Space server that is specifically written to provide 
+lightweight object based messaging between computers running on a network. 
+
+Before you start you need to make sure that have a version of Java installed 
+and running on your machine. Type -
+
+```
+> java -version
+```
+
+into a command prompt or shell. If this fails you will need to download a
+recent version of Java SE (1.5 or above) from www.java.com and install this 
+onto your machine.
+
+
+## The following refers to using the Release Version of this Project which is comming soon.
+
+
+In windows double click the startFly.bat file from the windows explorer and
+then double click the runExample.bat file. Alternativley type ... 
+
+```
+> cd fly
+> .\startFly.bat
+> .\runExample.bat 
+```
+
+in a windows command prompt. 
+
+On unix systems the startFly.sh script is set up to run the version of
+fly for the host platform. See the comments in the script if you want to
+run the fly server directly.
+
+```
+% cd fly
+% sh startFly.sh
+% sh runExample.sh
+```
+
+In either case, if this successful you will see something like this -
+
+```
+      >      
+    <----    
+  -------->  
+    <----       Fly Server (c) MMVI Zink Digital Ltd. 
+      >       Ver 2.0 : LBI 2.0 : Non Commercial License.
+
+Fly Server started on port 4396
+```
+
+and then some output from the example code which writes and takes 1000 example 
+objects to and from the space server. To write more or less objects, vary the 
+final parameter, or try running a number of example clients in parallel.
+
+If you want to see the scala source for the WriteTake example look in the src 
+directory. There are many examples in here of how to use the server via the 
+scala bindings.
+
+Enjoy using Fly! 
