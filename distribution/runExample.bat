@@ -1,2 +1,2 @@
-scala -classpath "flyscala_*.jar" com.zink.scala.fly.example.WriteTake 1000
+scala -classpath "*.jar" com.zink.scala.fly.example.WriteTake 1000
 pause

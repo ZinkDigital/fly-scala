@@ -7,30 +7,28 @@ import IO._
 object BuildSettings {
   val packageDist = TaskKey[Unit]("package-dist")
   val dist = TaskKey[Unit]("dist")
-  val flyServerVersion = "2.0"
+  val flyServerVersion = "fly-2.0"
 
   val buildSettings: Seq[Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
     organization := "com.flyobjectspace",
     version := "2.0.0-SNAPSHOT",
     scalaVersion := "2.10.2",
 
-    //testOptions in Test ++= Seq(Tests.Argument("junitxml", "html", "console")),
-
     packageDist <<= (baseDirectory, crossTarget, version, packageBin in Compile, packageDoc in Compile, packageSrc in Compile) map {
       (theBase, targetDir, theVersion, jarFile, docFile, srcFile) ⇒
-
-        val flyArchiveProject = new File(theBase.asFile.getParentFile, "FlyArchive")
-        val flyServerZip = new File(flyArchiveProject, "src/Fly-" + flyServerVersion + ".zip")
-        val serverPath = (targetDir / "fly") ** "*"
+        val flyServerZip = theBase / (flyServerVersion + ".zip")
+        val serverPath = (targetDir / flyServerVersion) ** "*"
+        val lib = (theBase / "lib" * "*")
+        val libEntries = lib x flat
         val docs = (theBase / "docs" * "*")
-        val distribution = (theBase / "distribution" * "*")
         val docEntries = docs x flat
+        val distribution = (theBase / "distribution" * "*")
         val distributionEntries = distribution x flat
 
         unzip(flyServerZip, targetDir)
 
         val distPaths = (jarFile +++ docFile +++ srcFile +++ serverPath) x relativeTo(targetDir)
-        zip(distPaths ++ docEntries ++ distributionEntries, (targetDir / ("FlyScala-" + theVersion + ".zip")))
+        zip(distPaths ++ docEntries ++ libEntries ++ distributionEntries, (targetDir / ("FlyScala-" + theVersion + ".zip")))
     },
     dist <<= Seq(packageBin in Compile, packageDoc in Compile, packageSrc in Compile, packageDist).dependOn)
 }
@@ -46,7 +44,7 @@ object Dependencies {
 
 }
 
-/* see http://www.scala-sbt.org/using_sonatype.html and http://www.cakesolutions.net/teamblogs/2012/01/28/publishing-sbt-projects-to-nexus/
+/* see ubli and http://www.cakesolutions.net/teamblogs/2012/01/28/publishing-sbt-projects-to-nexus/
  * Instructions from sonatype: https://issues.sonatype.org/browse/OSSRH-2841?focusedCommentId=150049#comment-150049
  * Deploy snapshot artifacts into repository https://oss.sonatype.org/content/repositories/snapshots
  * Deploy release artifacts into the staging repository https://oss.sonatype.org/service/local/staging/deploy/maven2
