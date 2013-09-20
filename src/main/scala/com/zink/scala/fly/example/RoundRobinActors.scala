@@ -56,10 +56,12 @@ object RoundRobinActors extends App {
     val anActor = actor {
       loop {
         react {
+
           case ACTOR_MESSAGE => fly.take(template, 0L).map(passBall(_, name, next))
 
           // we've been asked to start the game so put a ball in the space
-          case "Go"   => fly.write(new Ball(name, 1), 10 * 1000L)
+          case "Go"         => fly.write(new Ball(name, 1), 10 * 1000L)
+
         }
       }
     }

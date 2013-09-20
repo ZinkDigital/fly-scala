@@ -1,0 +1,70 @@
+
+Getting Started with Fly
+------------------------
+
+Welcome to Fly for Scala!  
+
+Fly is an object space server that is specifically written to provide 
+lightweight object based messaging between computers running on a network. 
+
+Before you start you need to make sure that have a version of Java and Scala
+installed and running on your machine. Type -
+
+> java -version
+
+- into a command prompt or shell. If this fails you will need to download a
+recent version of Java SE (1.5 or above) from www.java.com and install this 
+onto your machine.
+
+Then test scala with:
+
+> scala -version
+
+If this fails or the version is earlier than Scala 2.8.0, download Scala from
+http://www.scala-lang.org/
+
+Unzip the FlyScala download which will create the fly directory.
+
+On windows, double click the startFly.bat file from windows explorer and
+ then double click the runExample.bat file. Alternativley type ... 
+
+> cd fly
+> .\startFly.bat
+> cd ..
+> .\runExample.bat 
+
+in a windows command prompt. 
+
+
+On unix systems:
+
+% cd fly
+% sh startFly.sh
+% cd ..
+% sh runExample.sh
+
+
+In either case, if this successful you will see something like this -
+
+      >      
+    <----    
+  -------->  
+    <----       Fly Server (c)MMVI Zink Digital Ltd. 
+      >       Ver 1.2 : LBI 1.2 : Non Commercial License.
+
+
+Fly Server started on port 4396
+
+
+and some output from the example code which writes and takes 1000 example 
+objects to and from the space server. To write more or less objects, vary the 
+final parameter, or try running a number of example clients in parallel.
+
+If you want to see the source for the WriteTake example look in the src 
+zip. There are many examples in here of how to use the server via the 
+java bindings.
+
+Enjoy using Fly! 
+
+Need help? Go to http://groups.google.com/group/flyobjectspace/
+

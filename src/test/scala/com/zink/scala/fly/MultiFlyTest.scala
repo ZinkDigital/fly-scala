@@ -15,7 +15,9 @@ class MultiFlyTest extends SpecificationWithJUnit {
 
     val entries = new ArrayBuffer[TestEntry]
 
+
     for (i <- 0 until numEntries) {
+
       entries += new TestEntry(TEST_CODE, i, "payload")
     }
 

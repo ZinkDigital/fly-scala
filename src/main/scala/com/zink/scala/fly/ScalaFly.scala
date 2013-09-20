@@ -3,11 +3,16 @@ package com.zink.scala.fly
 import scala.actors.Actor
 import scala.collection.JavaConverters.collectionAsScalaIterableConverter
 import scala.collection.JavaConverters.seqAsJavaListConverter
+
 import com.zink.fly.Fly
 import com.zink.fly.NotifyHandler
 import com.zink.fly.kit.FlyFactory
 import com.zink.fly.Notifiable
 import com.zink.fly.FieldCodec
+
+import com.zink.fly.kit.FlyFactory
+import com.zink.fly._
+
 import com.zink.fly.stub.SerializingFieldCodec
 
 object ScalaFly {
@@ -62,3 +67,5 @@ case class ScalaFly(fly: Fly) extends PrimaryOps with MultiOps with  NotifyOps w
   }
   
 }
+
+

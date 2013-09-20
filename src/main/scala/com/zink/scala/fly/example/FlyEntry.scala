@@ -52,6 +52,7 @@ class FlyEntry(var name: String = null, var reference: BigInt = null, var payloa
 
   def setPayloadOfSize(payloadSize: Int) {
     val sb = new StringBuilder(payloadSize)
+
     for (i <- 0 until payloadSize) {
       sb.append('z')
     }

@@ -1,0 +1,12 @@
+.idea
+.idea_modules
+.DS_Store
+.lib
+target
+.target
+.classpath
+.project
+.cache
+project/target
+bin
+.ensime

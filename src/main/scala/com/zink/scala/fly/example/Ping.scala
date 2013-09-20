@@ -48,12 +48,15 @@ object Ping extends App {
 
   // start a game or return a served ball
   fly.take(template, 0L) match {
+
     case None => {
-      println("No ball in play")
+
       serveBall(fly)
       println("Served Ball - Please start a Pong")
     }
+
     case Some(gameBall) => {
+
       println("Received ball - game on!")
       returnBall(fly, gameBall)
     }
@@ -63,10 +66,12 @@ object Ping extends App {
   var myShots = 1
   while (myShots < shots) {
     fly.take(template, 0L) match {
+
       case None => {
         Thread.sleep(10)
       }
       case Some(ball) => {
+
         returnBall(fly, ball)
         myShots += 1
         if (myShots % 10 == 0) print(".")

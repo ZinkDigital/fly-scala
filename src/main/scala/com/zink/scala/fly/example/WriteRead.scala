@@ -1,4 +1,9 @@
 /*
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 0388488a26010829475d7d98a1f188c9e61babb3
 Permission to use, copy, modify, and distribute this software for any 
 purpose without fee is hereby granted, provided that this entire notice 
 is included in all copies of any software which is or includes a copy 

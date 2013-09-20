@@ -35,7 +35,9 @@ object MultiOps extends App {
   val entryCount = IntegerArgument(args, 1000)
 
   // set up a list of entries that we can use to write to the space
+
   val entries = 0 until entryCount map (i => FlyEntry("MultiFly", BigInt(i), payloadSize))
+
 
   // set up a template to match the entries
   val template = new FlyEntry("MultiFly");
@@ -55,6 +57,7 @@ object MultiOps extends App {
   private def writeReadAndTakeSingle(space: ScalaFly, template: FlyEntry, entries: Seq[FlyEntry]) {
 
     // write the objects
+
     for (entry <- entries) {
       space.write(entry, LEASE_TIME)
     }
