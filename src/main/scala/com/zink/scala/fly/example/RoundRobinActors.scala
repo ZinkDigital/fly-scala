@@ -1,0 +1,76 @@
+/*
+
+
+Permission to use, copy, modify, and distribute this software for any 
+purpose without fee is hereby granted, provided that this entire notice 
+is included in all copies of any software which is or includes a copy 
+or modification of this software and in all copies of the supporting 
+documentation for such software.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+*/
+package com.zink.scala.fly.example
+
+import scala.actors.Actor
+import scala.actors.Actor._
+
+import com.zink.scala.fly.ScalaFly
+import com.zink.scala.fly.ScalaFly.ACTOR_MESSAGE
+
+/**
+ *  This example creates several actors that pass a Ball between them.
+ *  Each actor first registers itself to be notified when a Ball appears
+ *  in the space with a name equal to the actor's name.
+ *  When an actor receives a notification, it takes the ball from the
+ *  space and puts it back with ball.name set to the next actor.
+ *  The last actor passes the ball back to the first actor.
+ */
+object RoundRobinActors extends App {
+  // NEVER do a get on an Option, except in a demo
+  val fly: ScalaFly = ScalaFly.makeFly().get
+
+  // create actors, with their name and the name of the actor to pass the ball to
+  val mickey = createActor("mickey", "donald")
+  createActor("donald", "betty")
+  createActor("betty", "tom")
+  createActor("tom", "gerry")
+  createActor("gerry", "mickey")
+
+  // tell mickey to start the ball rolling
+  mickey ! "Go"
+
+  def createActor(name: String, next: String): Actor = {
+    // we are interested in balls passed to 'name'
+    val template = new Ball(name)
+
+    val anActor = actor {
+      loop {
+        react {
+          case ACTOR_MESSAGE => fly.take(template, 0L).map(passBall(_, name, next))
+
+          // we've been asked to start the game so put a ball in the space
+          case "Go"   => fly.write(new Ball(name, 1), 10 * 1000L)
+        }
+      }
+    }
+    fly.notifyWrite(template, -1L, anActor)
+    anActor
+  }
+
+  def passBall(ball: Ball, from: String, next: String) {
+    val count = ball.batted.intValue()
+    println(from + " is passing the ball to " + next + ", the pass count is " + ball.batted)
+    Thread.sleep(500)
+    fly.write(new Ball(next, ball.batted + 1), 1 * 1000L)
+  }
+}
