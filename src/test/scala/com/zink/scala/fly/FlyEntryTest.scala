@@ -4,7 +4,7 @@ import org.specs2.mutable._
 
 class FlyEntryTest extends SpecificationWithJUnit {
 
-  val fly: ScalaFly = ScalaFly.makeFly().get
+  val fly: ScalaFly = ScalaFly.makeFly().right.get
 
   "Empty Entry" in {
     // set up the empty entry

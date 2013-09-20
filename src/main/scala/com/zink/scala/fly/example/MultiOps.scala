@@ -26,8 +26,8 @@ import com.zink.scala.fly.ScalaFly
 object MultiOps extends App {
   val LEASE_TIME = 100 * 1000
 
-  // NEVER do a get on an Option, except in a demo
-  val space: ScalaFly = ScalaFly.makeFly().get
+  // NEVER do a get on an Either, except in a demo
+  val space: ScalaFly = ScalaFly.makeFly().right.get
 
   // Set up a payload size and the number of objects to write and
   // read - tune these for your testing/deployment purposes

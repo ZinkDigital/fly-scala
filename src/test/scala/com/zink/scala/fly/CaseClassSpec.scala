@@ -8,7 +8,7 @@ case class ReallySpecialCase(z: BigInt, s: SpecialCase)
 
 class CaseClassSpec extends SpecificationWithJUnit {
 
-  val fly: ScalaFly = ScalaFly.makeFly().get
+  val fly: ScalaFly = ScalaFly.makeFly().right.get
 
   "Fly" should {
     "put and take simple case classes" in {

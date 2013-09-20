@@ -25,7 +25,6 @@ import scala.actors.Actor
 import scala.actors.Actor._
 
 import com.zink.scala.fly.ScalaFly
-import com.zink.scala.fly.ScalaFly.ACTOR_MESSAGE
 
 /**
  *  This example creates several actors that pass a Ball between them.
@@ -36,8 +35,8 @@ import com.zink.scala.fly.ScalaFly.ACTOR_MESSAGE
  *  The last actor passes the ball back to the first actor.
  */
 object RoundRobinActors extends App {
-  // NEVER do a get on an Option, except in a demo
-  val fly: ScalaFly = ScalaFly.makeFly().get
+  // NEVER do a get on an Either, except in a demo
+  val fly: ScalaFly = ScalaFly.makeFly().right.get
 
   // create actors, with their name and the name of the actor to pass the ball to
   val mickey = createActor("mickey", "donald")
@@ -56,10 +55,9 @@ object RoundRobinActors extends App {
     val anActor = actor {
       loop {
         react {
-          case ACTOR_MESSAGE ⇒ fly.take(template, 0L).map(passBall(_, name, next))
-
           // we've been asked to start the game so put a ball in the space
-          case "Go"          ⇒ fly.write(new Ball(name, 1), 10 * 1000L)
+          case "Go"               ⇒ fly.write(new Ball(name, 1), 10 * 1000L)
+          case x if x == template ⇒ fly.take(template, 0L).map(passBall(_, name, next))
         }
       }
     }

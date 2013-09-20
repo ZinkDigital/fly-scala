@@ -27,8 +27,8 @@ object WriteRead extends App {
 
   val iterations = IntegerArgument(args, 1000)
 
-  // NEVER do a get on an Option, except in a demo
-  val fly: ScalaFly = ScalaFly.makeFly().get
+  // NEVER do a get on an Either, except in a demo
+  val fly: ScalaFly = ScalaFly.makeFly().right.get
 
   // set up an object to write to the space
   val obj = new FlyEntry(name = "Fly 1", reference = BigInt(1))

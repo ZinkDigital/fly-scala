@@ -7,7 +7,7 @@ import org.specs2.execute._
 
 class MultiFlyTest extends SpecificationWithJUnit {
 
-  val fly: ScalaFly = ScalaFly.makeFly().get
+  val fly: ScalaFly = ScalaFly.makeFly().right.get
 
   "WriteMany" in {
     val TEST_CODE = "MultiFly1"

@@ -25,14 +25,13 @@ import scala.actors.Actor._
 import com.zink.fly.Fly
 import com.zink.fly.kit.FlyFactory
 import com.zink.scala.fly.ScalaFly
-import com.zink.scala.fly.ScalaFly._
 import com.zink.fly.kit.FlyFinder
 
 object Notification extends App {
   val LEASE = 1 * 1000L;
 
-  // NEVER do a get on an Option, except in a demo
-  val fly: ScalaFly = ScalaFly.makeFly().get
+  // NEVER do a get on an Either, except in a demo
+  val fly: ScalaFly = ScalaFly.makeFly().right.get
 
   println("Setting up notify handlers")
   setUpWriteNotify(fly)
@@ -75,8 +74,7 @@ object Notification extends App {
     val myActor = actor {
       loop {
         react {
-          case ACTOR_MESSAGE ⇒
-            println("Actor received a message!")
+          case template ⇒ println("Actor received a message!")
         }
       }
     }

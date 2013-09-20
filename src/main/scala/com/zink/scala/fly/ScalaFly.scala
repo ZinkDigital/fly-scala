@@ -1,17 +1,24 @@
 package com.zink.scala.fly
 
 import scala.actors.Actor
-import scala.collection.JavaConverters.collectionAsScalaIterableConverter
-import scala.collection.JavaConverters.seqAsJavaListConverter
-import com.zink.fly.kit.FlyFactory
+import scala.collection.JavaConverters._
+import com.zink.fly.kit._
 import com.zink.fly._
 import com.zink.fly.stub.SerializingFieldCodec
+import scala.util.{ Try, Success, Failure }
 
 object ScalaFly {
+  def makeFly(host: String = "localhost", codec: FieldCodec = new SerializingFieldCodec()): Either[Throwable, ScalaFly] = toScalaFly(FlyFactory.makeFly(host, codec))
 
-  val ACTOR_MESSAGE = "message"
+  def find(): Either[Throwable, ScalaFly] = toScalaFly(new FlyFinder().find())
+  def find(tag: String): Either[Throwable, ScalaFly] = toScalaFly(new FlyFinder().find(tag))
+  def find(tags: Seq[String]): Either[Throwable, ScalaFly] = toScalaFly(new FlyFinder().find(tags.toArray[String]))
 
-  def makeFly(host: String = "localhost", codec: FieldCodec = new SerializingFieldCodec()): Option[ScalaFly] = Option(FlyFactory.makeFly(host, codec)).map(ScalaFly(_))
+  private def toScalaFly(fly: ⇒ Fly): Either[Throwable, ScalaFly] =
+    Try(fly) match {
+      case Success(fly)   ⇒ Right(ScalaFly(fly))
+      case Failure(error) ⇒ Left(error)
+    }
 }
 
 case class ScalaFly(fly: Fly) {
@@ -26,7 +33,7 @@ case class ScalaFly(fly: Fly) {
 
   def notifyWrite(template: AnyRef, handler: Notifiable, leaseTime: Long): Boolean = fly.notifyWrite(template, handler, leaseTime)
   def notifyWrite(template: AnyRef, leaseTime: Long)(block: ⇒ Unit): Boolean = fly.notifyWrite(template, new Notifier(block), leaseTime)
-  def notifyWrite(template: AnyRef, leaseTime: Long, actor: Actor): Boolean = notifyWrite(template, leaseTime) { actor ! ScalaFly.ACTOR_MESSAGE }
+  def notifyWrite(template: AnyRef, leaseTime: Long, actor: Actor): Boolean = notifyWrite(template, leaseTime) { actor ! template }
 
   def snapshot(template: AnyRef): AnyRef = fly.snapshot(template)
 

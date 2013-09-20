@@ -7,7 +7,7 @@ import com.zink.fly.NotifyHandler
 
 class NotiFlyTest extends Specification {
 
-  val fly: ScalaFly = ScalaFly.makeFly().get
+  val fly: ScalaFly = ScalaFly.makeFly().right.get
 
   "Notify Match" in {
 

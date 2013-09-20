@@ -11,6 +11,19 @@ http://www.scala-lang.org/node/242
 Fly Scala Release History
 -------------------------
 
+FlyScala_2.10.2-2.0.0
+  A major change to the implementation - we've removed it and now just offer a
+  wrapper around the Java library to make maintenance simpler.
+
+  com.zink.scala.fly.ScalaFly provides a simply method for finding a Fly server.
+  
+  com.zink.scala.fly.ScalaFly is a wrapper around a Java Fly instance offering a
+  more idiomatic Scala API.
+
+  The ACTOR_MESSAGE has been removed, instead actors will be sent the template
+  used when registering the actor for receiving callbacks from the space.
+  This will allow you to use an actor for multiple callbacks.
+
 FlyScala_2.9.1-1.3.9
   Made fairly significant performance improvements in the Scala lib
 

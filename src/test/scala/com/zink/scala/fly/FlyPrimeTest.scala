@@ -7,7 +7,7 @@ import org.specs2.execute._
 class FlyPrimeTest extends Specification {
 
   val HOST = "localhost"
-  val fly: ScalaFly = ScalaFly.makeFly().get
+  val fly: ScalaFly = ScalaFly.makeFly().right.get
   val template = new TestEntry("FlyPrime 1")
 
   override def is = args(sequential = true) ^ super.is
