@@ -54,8 +54,8 @@ trait PerformanceOps {
   def snapshot(template: AnyRef): AnyRef = fly.snapshot(template)
 }
 
-case class ScalaFly(fly: Fly) extends PrimaryOps with MultiOps with NotifyOps with PerformanceOps {
-  class Notifier(f: => Unit) extends NotifyHandler {
-    def templateMatched() = f
-  }
+case class ScalaFly(fly: Fly) extends PrimaryOps with MultiOps with NotifyOps with PerformanceOps
+
+class Notifier(f: => Unit) extends NotifyHandler {
+  def templateMatched() = f
 }
