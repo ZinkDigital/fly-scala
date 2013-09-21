@@ -15,7 +15,7 @@ object BuildSettings {
     scalaVersion := "2.10.2",
 
     packageDist <<= (baseDirectory, crossTarget, version, packageBin in Compile, packageDoc in Compile, packageSrc in Compile) map {
-      (theBase, targetDir, theVersion, jarFile, docFile, srcFile) ⇒
+      (theBase, targetDir, theVersion, jarFile, docFile, srcFile) =>
         val flyServerZip = theBase / (flyServerVersion + ".zip")
         val serverPath = (targetDir / flyServerVersion) ** "*"
         val lib = (theBase / "lib" * "*")
@@ -57,8 +57,8 @@ object Publishing {
   def publishSettings: Seq[Setting[_]] = Seq(
     publishMavenStyle := true,
     publishArtifact in Test := false,
-    pomIncludeRepository := { _ ⇒ false },
-    publishTo <<= version { v: String ⇒
+    pomIncludeRepository := { _ => false },
+    publishTo <<= version { v: String =>
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT"))
         Some("snapshots" at nexus + "content/repositories/snapshots")

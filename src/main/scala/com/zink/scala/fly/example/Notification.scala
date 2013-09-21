@@ -74,7 +74,7 @@ object Notification extends App {
     val myActor = actor {
       loop {
         react {
-          case template ⇒ println("Actor received a message!")
+          case template => println("Actor received a message!")
         }
       }
     }

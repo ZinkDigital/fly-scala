@@ -23,11 +23,11 @@ package com.zink.scala.fly.example
 
 object Timing {
 
-  def apply(name: String)(block: ⇒ Unit) {
+  def apply(name: String)(block: => Unit) {
     apply(name, 1)(block)
   }
 
-  def apply(name: String, iterations: Int)(block: ⇒ Unit) {
+  def apply(name: String, iterations: Int)(block: => Unit) {
     println(name)
     var count = 0
     val start = System.currentTimeMillis()

@@ -15,7 +15,7 @@ class MultiFlyTest extends SpecificationWithJUnit {
 
     val entries = new ArrayBuffer[TestEntry]
 
-    for (i ← 0 until numEntries) {
+    for (i <- 0 until numEntries) {
       entries += new TestEntry(TEST_CODE, i, "payload")
     }
 
@@ -35,7 +35,7 @@ class MultiFlyTest extends SpecificationWithJUnit {
     val TEST_CODE = "MultiFly2"
 
     val numEntries = 35
-    for (i ← 0 until numEntries) {
+    for (i <- 0 until numEntries) {
       fly.write(new TestEntry(TEST_CODE, i, "payload"), 1000)
     }
 
@@ -56,7 +56,7 @@ class MultiFlyTest extends SpecificationWithJUnit {
     val TEST_CODE = "MultiFly3"
 
     val numEntries = 25
-    for (i ← 0 until numEntries) {
+    for (i <- 0 until numEntries) {
       fly.write(new TestEntry(TEST_CODE, i, "payload"), 1000)
     }
 

@@ -56,8 +56,8 @@ object RoundRobinActors extends App {
       loop {
         react {
           // we've been asked to start the game so put a ball in the space
-          case "Go"               ⇒ fly.write(new Ball(name, 1), 10 * 1000L)
-          case x if x == template ⇒ fly.take(template, 0L).map(passBall(_, name, next))
+          case "Go"               => fly.write(new Ball(name, 1), 10 * 1000L)
+          case x if x == template => fly.take(template, 0L).map(passBall(_, name, next))
         }
       }
     }
