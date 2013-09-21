@@ -31,7 +31,6 @@ object BuildSettings {
         val distZip = targetDir / ("FlyScala-" + theVersion + ".zip")
         zip(distPaths ++ docEntries ++ libEntries ++ distributionEntries, (distZip))
         s.log.info(">>> The distribution is in " + distZip)
-        //println(">>> The distribution is in " + distZip)
     },
     dist <<= Seq(packageBin in Compile, packageDoc in Compile, packageSrc in Compile, packageDist).dependOn)
 }
