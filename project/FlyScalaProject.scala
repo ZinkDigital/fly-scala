@@ -14,8 +14,8 @@ object BuildSettings {
     version := "2.0.0-SNAPSHOT",
     scalaVersion := "2.10.2",
 
-    packageDist <<= (baseDirectory, crossTarget, version, packageBin in Compile, packageDoc in Compile, packageSrc in Compile) map {
-      (theBase, targetDir, theVersion, jarFile, docFile, srcFile) =>
+    packageDist <<= (baseDirectory, crossTarget, version, packageBin in Compile, packageDoc in Compile, packageSrc in Compile, streams) map {
+      (theBase, targetDir, theVersion, jarFile, docFile, srcFile, s) =>
         val flyServerZip = theBase / (flyServerVersion + ".zip")
         val serverPath = (targetDir / flyServerVersion) ** "*"
         val lib = (theBase / "lib" * "*")
@@ -28,7 +28,10 @@ object BuildSettings {
         unzip(flyServerZip, targetDir)
 
         val distPaths = (jarFile +++ docFile +++ srcFile +++ serverPath) x relativeTo(targetDir)
-        zip(distPaths ++ docEntries ++ libEntries ++ distributionEntries, (targetDir / ("FlyScala-" + theVersion + ".zip")))
+        val distZip = targetDir / ("FlyScala-" + theVersion + ".zip")
+        zip(distPaths ++ docEntries ++ libEntries ++ distributionEntries, (distZip))
+        s.log.info(">>> The distribution is in " + distZip)
+        //println(">>> The distribution is in " + distZip)
     },
     dist <<= Seq(packageBin in Compile, packageDoc in Compile, packageSrc in Compile, packageDist).dependOn)
 }
