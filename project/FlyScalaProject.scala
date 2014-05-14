@@ -11,7 +11,7 @@ object BuildSettings {
 
   val buildSettings: Seq[Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
     organization := "com.flyobjectspace",
-    version := "2.1.1-SNAPHOT",
+    version := "2.1.0",
     scalaVersion := "2.10.4",
 
     packageDist <<= (baseDirectory, crossTarget, version, packageBin in Compile, packageDoc in Compile, packageSrc in Compile, streams) map {
@@ -80,14 +80,6 @@ object Publishing {
         <url>git@github.com:fly-object-space/fly-scala.git</url>
         <connection>scm:git:git@github.com:fly-object-space/fly-scala.git</connection>
       </scm>
-      <description>
-        Fly Scala is a scala client library for working with a Fly Server.
-      Fly is an object space server that is specifically written to provide
-      lightweight object based messaging between computers running on a network.
-      This distribution does not contain the server, please go to
-      http://www.flyobjectspace.com/ for the server that matches the version
-      of Fly Scala you want to use.
-      </description>
       <url>http://www.flyobjectspace.com</url>
       <developers>
         <developer>
