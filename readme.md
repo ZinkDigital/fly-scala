@@ -18,7 +18,14 @@ recent version of Java SE (1.5 or above) from www.java.com and install this
 onto your machine.
 
 
-## The following refers to using the Release Version of this Project which is coming soon.
+Getting Fly-Scala
+---------------
+
+In SBT do this:
+
+```scala
+libraryDependencies ++= Seq("com.flyobjectspace" %% "flyscala" % "2.1.0")
+```
 
 
 In windows double click the startFly.bat file from the windows explorer and
