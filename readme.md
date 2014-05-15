@@ -21,6 +21,8 @@ onto your machine.
 Getting Fly-Scala
 ---------------
 
+Get the binary from https://github.com/fly-object-space/fly-java/releases
+
 In SBT do this:
 
 ```scala
