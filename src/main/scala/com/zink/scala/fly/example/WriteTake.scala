@@ -34,7 +34,7 @@ object WriteTake extends App {
   val obj = new FlyEntry(name = "Fly 2", reference = BigInt(17))
   obj.setPayloadOfSize(100)
 
-  // set up a tempate to match the above object
+  // set up a template to match the above object
   val template = new FlyEntry(name = "Fly 2")
   template.reference = null // match any value in this template
   template.payload = null // ditto

@@ -26,7 +26,7 @@ http://www.scala-lang.org/
 Unzip the FlyScala download which will create the fly directory.
 
 On windows, double click the startFly.bat file from windows explorer and
- then double click the runExample.bat file. Alternativley type ... 
+ then double click the runExample.bat file. Alternatively type ...
 
 > cd fly
 > .\startFly.bat

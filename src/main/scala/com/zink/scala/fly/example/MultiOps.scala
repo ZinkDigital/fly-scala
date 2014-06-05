@@ -38,7 +38,7 @@ object MultiOps extends App {
   val entries = 0 until entryCount map (i => FlyEntry("MultiFly", BigInt(i), payloadSize))
 
   // set up a template to match the entries
-  val template = new FlyEntry("MultiFly");
+  val template = new FlyEntry("MultiFly")
   template.reference = null; // match any value in this template
   template.payload = null // ditto
 

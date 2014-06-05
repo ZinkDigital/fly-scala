@@ -18,7 +18,7 @@ class FlyPrimeTest extends Specification {
     fly.write(entry, 1000L)
     fly.take(template, 0L) must beSome(entry)
 
-    // now try and takem it again to prove that
+    // now try and take it again to prove that
     // there is nothing there
     fly.take(template, 0L) must beNone
   }

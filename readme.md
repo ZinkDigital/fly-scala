@@ -31,7 +31,7 @@ libraryDependencies ++= Seq("com.flyobjectspace" %% "flyscala" % "2.1.0")
 
 
 In windows double click the startFly.bat file from the windows explorer and
-then double click the runExample.bat file. Alternativley type ... 
+then double click the runExample.bat file. Alternatively type ... 
 
 ```
 > cd fly

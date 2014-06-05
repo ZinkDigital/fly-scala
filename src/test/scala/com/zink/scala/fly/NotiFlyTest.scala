@@ -59,7 +59,7 @@ class NotiFlyTest extends Specification {
     // allow the reader thread to get the message
     Thread.sleep(1000)
 
-    // chack that the handler did not get called
+    // check that the handler did not get called
     handler.getMatchCalled mustEqual 0
   }
 
@@ -85,7 +85,7 @@ class NotiFlyTest extends Specification {
 
     Thread.sleep(100)
 
-    // chack that the handler got called once and once only
+    // check that the handler got called once and once only
     handler.getMatchCalled mustEqual 1
 
     // now wait for the lease to expire 

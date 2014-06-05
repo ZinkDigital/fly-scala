@@ -1,7 +1,5 @@
 import sbt._
 import Keys._
-import java.io.File
-import scala.io.Source
 import IO._
 
 object BuildSettings {
@@ -18,18 +16,18 @@ object BuildSettings {
       (theBase, targetDir, theVersion, jarFile, docFile, srcFile, s) =>
         val flyServerZip = theBase / (flyServerVersion + ".zip")
         val serverPath = (targetDir / flyServerVersion) ** "*"
-        val lib = (theBase / "lib" * "*")
+        val lib = theBase / "lib" * "*"
         val libEntries = lib x flat
-        val docs = (theBase / "docs" * "*")
+        val docs = theBase / "docs" * "*"
         val docEntries = docs x flat
-        val distribution = (theBase / "distribution" * "*")
+        val distribution = theBase / "distribution" * "*"
         val distributionEntries = distribution x flat
 
         unzip(flyServerZip, targetDir)
 
         val distPaths = (jarFile +++ docFile +++ srcFile +++ serverPath) x relativeTo(targetDir)
         val distZip = targetDir / ("FlyScala-" + theVersion + ".zip")
-        zip(distPaths ++ docEntries ++ libEntries ++ distributionEntries, (distZip))
+        zip(distPaths ++ docEntries ++ libEntries ++ distributionEntries, distZip)
         s.log.info(">>> The distribution is in " + distZip)
     },
     dist <<= Seq(packageBin in Compile, packageDoc in Compile, packageSrc in Compile, packageDist).dependOn)
@@ -59,7 +57,7 @@ object Publishing {
   def publishSettings: Seq[Setting[_]] = Seq(
     publishMavenStyle := true,
     publishArtifact in Test := false,
-    pomIncludeRepository := { _ => false },
+    pomIncludeRepository := { _ => false},
     publishTo <<= version { v: String =>
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT"))
@@ -68,7 +66,7 @@ object Publishing {
         Some("releases" at nexus + "service/local/staging/deploy/maven2")
     },
 
-    pomExtra := (
+    pomExtra :=
       <licenses>
         <license>
           <name>MIT License</name>
@@ -76,33 +74,33 @@ object Publishing {
           <distribution>repo</distribution>
         </license>
       </licenses>
-      <scm>
-        <url>git@github.com:fly-object-space/fly-scala.git</url>
-        <connection>scm:git:git@github.com:fly-object-space/fly-scala.git</connection>
-      </scm>
-      <url>http://www.flyobjectspace.com</url>
-      <developers>
-        <developer>
-          <id>cjw</id>
-          <name>Channing Walton</name>
-          <email>channing [dot] walton [at] underscoreconsulting [dot] com</email>
-          <organization>Underscore Consulting Ltd</organization>
-        </developer>
-        <developer>
-          <id>nw</id>
-          <name>Nigel Warren</name>
-          <organization>Zink Digital Ltd</organization>
-        </developer>
-      </developers>
-      <mailingLists>
-        <mailingList>
-          <name>User and Developer Discussion List</name>
-          <archive>http://groups.google.com/group/flyobjectspace</archive>
-          <post>flyobjectspace@googlegroups.com</post>
-          <subscribe>flyobjectspace+subscribe@googlegroups.com</subscribe>
-          <unsubscribe>flyobjectspace+unsubscribe@googlegroups.com</unsubscribe>
-        </mailingList>
-      </mailingLists>))
+        <scm>
+          <url>git@github.com:fly-object-space/fly-scala.git</url>
+          <connection>scm:git:git@github.com:fly-object-space/fly-scala.git</connection>
+        </scm>
+        <url>http://www.flyobjectspace.com</url>
+        <developers>
+          <developer>
+            <id>cjw</id>
+            <name>Channing Walton</name>
+            <email>channing [dot] walton [at] underscoreconsulting [dot] com</email>
+            <organization>Underscore Consulting Ltd</organization>
+          </developer>
+          <developer>
+            <id>nw</id>
+            <name>Nigel Warren</name>
+            <organization>Zink Digital Ltd</organization>
+          </developer>
+        </developers>
+        <mailingLists>
+          <mailingList>
+            <name>User and Developer Discussion List</name>
+            <archive>http://groups.google.com/group/flyobjectspace</archive>
+            <post>flyobjectspace@googlegroups.com</post>
+            <subscribe>flyobjectspace+subscribe@googlegroups.com</subscribe>
+            <unsubscribe>flyobjectspace+unsubscribe@googlegroups.com</unsubscribe>
+          </mailingList>
+        </mailingLists>)
 }
 
 object FlyScalaBuild extends Build {
@@ -114,5 +112,5 @@ object FlyScalaBuild extends Build {
   lazy val flyScala = Project(
     "FlyScala",
     file("."),
-    settings = buildSettings ++ publishSettings ++ Seq(resolvers := Seq(Classpaths.typesafeResolver), libraryDependencies ++= specs2 ++ Seq(junit, pegdown, scalaActors)))
+    settings = buildSettings ++ publishSettings ++ Seq(resolvers := Seq(Classpaths.typesafeReleases), libraryDependencies ++= specs2 ++ Seq(junit, pegdown, scalaActors)))
 }

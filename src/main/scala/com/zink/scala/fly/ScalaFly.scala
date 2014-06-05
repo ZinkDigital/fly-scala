@@ -16,7 +16,7 @@ object ScalaFly {
 
   private def toScalaFly(fly: => Fly): Either[Throwable, ScalaFly] =
     Try(fly) match {
-      case Success(fly)   => Right(ScalaFly(fly))
+      case Success(f)   => Right(ScalaFly(f))
       case Failure(error) => Left(error)
     }
 }

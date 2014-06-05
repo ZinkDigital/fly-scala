@@ -28,7 +28,7 @@ import com.zink.scala.fly.ScalaFly
 import com.zink.fly.kit.FlyFinder
 
 object Notification extends App {
-  val LEASE = 1 * 1000L;
+  val LEASE = 1 * 1000L
 
   // NEVER do a get on an Either, except in a demo
   val fly: ScalaFly = ScalaFly.makeFly().right.get
@@ -74,7 +74,7 @@ object Notification extends App {
     val myActor = actor {
       loop {
         react {
-          case template => println("Actor received a message!")
+          case _ => println("Actor received a message!")
         }
       }
     }
