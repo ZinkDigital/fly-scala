@@ -14,19 +14,19 @@ and running on your machine. Type -
 ```
 
 into a command prompt or shell. If this fails you will need to download a
-recent version of Java SE (1.5 or above) from www.java.com and install this 
+recent version of Java SE (1.6 or above) from www.java.com and install this 
 onto your machine.
 
 
 Getting Fly-Scala
 ---------------
 
-Get the binary from https://github.com/fly-object-space/fly-java/releases
+Get the fly binary, which is part of the fly-java project, from https://github.com/fly-object-space/fly-java/releases
 
-In SBT do this:
+In SBT do this (which will pull flyjava from the mavens):
 
 ```scala
-libraryDependencies ++= Seq("com.flyobjectspace" %% "flyscala" % "2.1.0")
+libraryDependencies ++= Seq("com.flyobjectspace" %% "flyscala" % "2.1.1")
 ```
 
 
