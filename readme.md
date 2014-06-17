@@ -26,7 +26,7 @@ Get the fly binary, which is part of the fly-java project, from https://github.c
 In SBT do this (which will pull flyjava from the mavens):
 
 ```scala
-libraryDependencies ++= Seq("com.flyobjectspace" %% "flyscala" % "2.1.1")
+libraryDependencies ++= Seq("com.flyobjectspace" %% "flyscala" % "2.1.3")
 ```
 
 
