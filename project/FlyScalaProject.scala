@@ -38,7 +38,7 @@ object Dependencies {
     "org.specs2" %% "specs2" % "2.3.12" % "test",
     "org.mockito" % "mockito-all" % "1.9.5" % "test->default")
 
-  val flyJava = "com.flyobjectspace" % "flyjava" % "2.0.2"
+  val flyJava = "com.flyobjectspace" % "flyjava" % "2.0.3"
   val pegdown = "org.pegdown" % "pegdown" % "1.2.1" % "test"
   val junit = "junit" % "junit" % "4.11" % "test"
   val scalaActors = "org.scala-lang" % "scala-actors" % "2.10.4"
