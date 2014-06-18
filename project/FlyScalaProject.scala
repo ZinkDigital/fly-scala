@@ -11,6 +11,7 @@ object BuildSettings {
     organization := "com.flyobjectspace",
     version := "2.1.4-SNAPSHOT",
     scalaVersion := "2.10.4",
+    scalacOptions += "-target:jvm-1.6",
 
     packageDist <<= (baseDirectory, crossTarget, version, packageBin in Compile, packageDoc in Compile, packageSrc in Compile, streams) map {
       (theBase, targetDir, theVersion, jarFile, docFile, srcFile, s) =>
