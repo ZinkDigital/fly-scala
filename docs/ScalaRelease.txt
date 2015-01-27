@@ -11,6 +11,9 @@ http://www.scala-lang.org/node/242
 Fly Scala Release History
 -------------------------
 
+FlyScala_2.11.2-2.1.6
+  Upgrade to scala 2.11
+
 FlyScala_2.10.2-2.0.0
   A major change to the implementation - we've removed it and now just offer a
   wrapper around the Java library to make maintenance simpler.
