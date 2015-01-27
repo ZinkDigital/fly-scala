@@ -10,7 +10,7 @@ object BuildSettings {
   val buildSettings: Seq[Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
     organization := "com.flyobjectspace",
     version := "2.1.6-SNAPSHOT",
-    scalaVersion := "2.10.4",
+    scalaVersion := "2.11.5",
     scalacOptions += "-target:jvm-1.6",
 
     packageDist <<= (baseDirectory, crossTarget, version, packageBin in Compile, packageDoc in Compile, packageSrc in Compile, streams) map {
@@ -36,13 +36,12 @@ object BuildSettings {
 
 object Dependencies {
   val specs2 = Seq(
-    "org.specs2" %% "specs2" % "2.3.12" % "test",
+    "org.specs2" %% "specs2" % "2.4.15" % "test",
     "org.mockito" % "mockito-all" % "1.9.5" % "test->default")
 
   val flyJava = "com.flyobjectspace" % "flyjava" % "2.0.4"
-  val pegdown = "org.pegdown" % "pegdown" % "1.2.1" % "test"
   val junit = "junit" % "junit" % "4.11" % "test"
-  val scalaActors = "org.scala-lang" % "scala-actors" % "2.10.4"
+  val scalaActors = "org.scala-lang" % "scala-actors" % "2.11.5"
 
 }
 
@@ -114,5 +113,5 @@ object FlyScalaBuild extends Build {
   lazy val flyScala = Project(
     "FlyScala",
     file("."),
-    settings = buildSettings ++ publishSettings ++ Seq(resolvers := Seq(Classpaths.typesafeReleases, Resolver.sonatypeRepo("releases")), libraryDependencies ++= specs2 ++ Seq(flyJava, junit, pegdown, scalaActors)))
+    settings = buildSettings ++ publishSettings ++ Seq(resolvers := Seq(Classpaths.typesafeReleases, Resolver.sonatypeRepo("releases")), libraryDependencies ++= specs2 ++ Seq(flyJava, junit, scalaActors)))
 }

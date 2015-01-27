@@ -8,7 +8,7 @@ class FlyEntryTest extends SpecificationWithJUnit {
 
   "Empty Entry" in {
     // set up the empty entry
-    val leaseTime = 60 * 1000L
+    val leaseTime: Long =  100L
     val entry = new EmptyEntry()
 
     val lease = fly.write(entry, leaseTime)

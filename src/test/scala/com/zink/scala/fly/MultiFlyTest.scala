@@ -79,4 +79,23 @@ class MultiFlyTest extends SpecificationWithJUnit {
     entries.size mustEqual numEntries - numToTake * 2
     entries.toList.head.reference mustEqual BigInt(numToTake * 2)
   }
+
+  "Paul's Read many" in {
+    val fly = ScalaFly.makeFly(host = "localhost").right.get
+
+    val one = fly.write(Test("one"), Int.MaxValue)
+    println("### one: " + one)
+
+    val two = fly.write(Test("two"), Int.MaxValue)
+    println("### two: " + one)
+
+    val read = fly.read(Test(null), Int.MaxValue)
+    println("### read: " + read)
+
+    val readMany = fly.readMany(Test(null), 2)
+    println("### readMany: " + readMany)
+
+    readMany must containAllOf(Seq(Test("two")))
+  }
 }
+case class Test(s: String)
