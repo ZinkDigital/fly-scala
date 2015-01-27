@@ -9,7 +9,7 @@ object BuildSettings {
 
   val buildSettings: Seq[Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
     organization := "com.flyobjectspace",
-    version := "2.1.6-SNAPSHOT",
+    version := "2.1.6",
     scalaVersion := "2.11.5",
     scalacOptions += "-target:jvm-1.6",
 
