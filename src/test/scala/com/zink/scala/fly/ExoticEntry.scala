@@ -18,7 +18,7 @@ class ExoticEntry {
     private val name6 = "privateFinal"
   
     
-    def setName2(name2:String) {
+    def setName2(name2:String) = {
         this.name2 = name2
     }
     

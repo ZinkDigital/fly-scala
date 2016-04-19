@@ -21,11 +21,9 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.zink.scala.fly.example
 
-import scala.actors.Actor._
-import com.zink.fly.Fly
-import com.zink.fly.kit.FlyFactory
 import com.zink.scala.fly.ScalaFly
-import com.zink.fly.kit.FlyFinder
+
+import scala.actors.Actor._
 
 object Notification extends App {
   val LEASE = 1 * 1000L
@@ -55,7 +53,7 @@ object Notification extends App {
   println("End.")
   System.exit(0)
 
-  private def setUpWriteNotify(fly: ScalaFly) {
+  private def setUpWriteNotify(fly: ScalaFly) = {
     val template = new FlyEntry()
 
     template.name = "Example NotiFly Entry" // match this string
@@ -82,12 +80,12 @@ object Notification extends App {
     fly.notifyWrite(template, LEASE, myActor)
   }
 
-  private def writeNonMatchingEntry(fly: ScalaFly) {
+  private def writeNonMatchingEntry(fly: ScalaFly) = {
     val entry = new FlyEntry(name = "Not a matching entry", reference = BigInt(7), payload = new String("Seven"))
     fly.write(entry, LEASE)
   }
 
-  private def writeMatchingEntry(fly: ScalaFly) {
+  private def writeMatchingEntry(fly: ScalaFly) = {
     val entry = new FlyEntry(name = "Example NotiFly Entry", reference = BigInt(11), payload = new String("Eleven"))
     fly.write(entry, LEASE)
   }

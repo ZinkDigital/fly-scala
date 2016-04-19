@@ -50,7 +50,7 @@ class FlyEntry(var name: String = null, var reference: BigInt = null, var payloa
     sb.toString()
   }
 
-  def setPayloadOfSize(payloadSize: Int) {
+  def setPayloadOfSize(payloadSize: Int) = {
     val sb = new StringBuilder(payloadSize)
     for (i <- 0 until payloadSize) {
       sb.append('z')

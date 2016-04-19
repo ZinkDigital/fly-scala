@@ -21,13 +21,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.zink.scala.fly.example
 
-import scala.actors.Actor._
-import com.zink.fly.Fly
-import com.zink.fly.kit.FlyFactory
 import com.zink.scala.fly.ScalaFly
-import com.zink.scala.fly.ScalaFly._
-import com.zink.fly.kit.FlyFinder
-import com.zink.fly.FlyPrime
 
 /**
  *  Ping is a player in a game of ping pong, bouncing a Ball instance via the fly space.
@@ -71,12 +65,12 @@ object Ping extends App {
   }
   println("\nPlayed all my " + myShots + " shots")
 
-  private def serveBall(fly: ScalaFly) {
+  private def serveBall(fly: ScalaFly) = {
     val gameBall = new Ball("Ping", BigInt(1))
     fly.write(gameBall, 60 * 1000L)
   }
 
-  private def returnBall(fly: ScalaFly, ball: Ball) {
+  private def returnBall(fly: ScalaFly, ball: Ball) = {
     val returned = new Ball("Ping", ball.batted + 1)
     fly.write(returned, 1 * 1000L)
   }

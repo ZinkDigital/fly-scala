@@ -1,8 +1,6 @@
 package com.zink.scala.fly
 
 import org.specs2.mutable._
-import org.specs2.specification._
-import org.specs2.execute._
 
 class FlyPrimeTest extends Specification {
 
@@ -49,7 +47,7 @@ class FlyPrimeTest extends Specification {
 
   "WaitingTake" in {
     val entry = MakeTestEntry("FlyPrime 1", BigInt(5), 512)
-    val TAKE_TIME = 576
+    val TAKE_TIME = 576L
 
     fly.take(template, TAKE_TIME) must beNone
   }

@@ -10,8 +10,23 @@ object BuildSettings {
   val buildSettings: Seq[Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]](
     organization := "com.flyobjectspace",
     version := "2.1.7-SNAPSHOT",
-    scalaVersion := "2.11.5",
-    scalacOptions += "-target:jvm-1.6",
+    scalaVersion := "2.11.8",
+    scalacOptions := Seq(
+      "-target:jvm-1.6",
+      "-language:_",
+      // "-Xfatal-warnings",
+      "-deprecation",
+      "-encoding", "UTF-8",
+      "-feature",
+      "-unchecked",
+      "-Xlint",
+      "-Yno-adapted-args",
+      "-Ywarn-dead-code",
+      "-Ywarn-numeric-widen",
+      //"-Ywarn-value-discard",
+      "-Xfuture",
+      "-Ywarn-unused-import"),
+
 
     packageDist <<= (baseDirectory, crossTarget, version, packageBin in Compile, packageDoc in Compile, packageSrc in Compile, streams) map {
       (theBase, targetDir, theVersion, jarFile, docFile, srcFile, s) =>
@@ -36,12 +51,13 @@ object BuildSettings {
 
 object Dependencies {
   val specs2 = Seq(
-    "org.specs2" %% "specs2" % "2.4.15" % "test",
-    "org.mockito" % "mockito-all" % "1.9.5" % "test->default")
+    "org.specs2" %% "specs2-core" % "3.7.2" % "test",
+    "org.specs2" %% "specs2-junit" % "3.7.2" % "test",
+    "org.mockito" % "mockito-all" % "1.10.19" % "test->default")
 
   val flyJava = "com.flyobjectspace" % "flyjava" % "2.0.4"
-  val junit = "junit" % "junit" % "4.11" % "test"
-  val scalaActors = "org.scala-lang" % "scala-actors" % "2.11.5"
+  val junit = "junit" % "junit" % "4.12" % "test"
+  val scalaActors = "org.scala-lang" % "scala-actors" % "2.11.8"
 
 }
 

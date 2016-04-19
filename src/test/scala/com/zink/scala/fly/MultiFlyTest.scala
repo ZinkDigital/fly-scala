@@ -1,9 +1,8 @@
 package com.zink.scala.fly
 
-import scala.collection.mutable.ArrayBuffer
 import org.specs2.mutable._
-import org.specs2.specification._
-import org.specs2.execute._
+
+import scala.collection.mutable.ArrayBuffer
 
 class MultiFlyTest extends SpecificationWithJUnit {
 
@@ -40,10 +39,10 @@ class MultiFlyTest extends SpecificationWithJUnit {
     }
 
     val template = new TestEntry(name = TEST_CODE)
-    val numToRead = 10
+    val numToRead = 10L
 
     "read limited number of entries" in {
-      var entries = fly.readMany(template, numToRead)
+      val entries = fly.readMany(template, numToRead)
 
       // Check the number of entries
       entries.size mustEqual numToRead
@@ -62,7 +61,7 @@ class MultiFlyTest extends SpecificationWithJUnit {
 
     val template = new TestEntry(name = TEST_CODE)
 
-    val numToTake = 10
+    val numToTake = 10L
     var entries = fly.takeMany(template, numToTake)
 
     entries.size mustEqual numToTake

@@ -1,11 +1,7 @@
 package com.zink.scala.fly
 
-import com.zink.scala.fly.example.WriteRead
-import com.zink.scala.fly.example.WriteTake
-
+import com.zink.scala.fly.example.{WriteRead, WriteTake}
 import org.specs2.mutable._
-import org.specs2.specification._
-import org.specs2.execute._
 
 class ThreadsTest extends Specification {
   
@@ -23,13 +19,13 @@ class ThreadsTest extends Specification {
   }
     
    class Taker extends Thread {
-       override def run() {
+       override def run() = {
            WriteTake.main(new Array[String](0) )  
        }
    }
 
    class Reader extends Thread {
-       override def run() {
+       override def run() = {
            WriteRead.main(new Array[String](0))  
        }
    }

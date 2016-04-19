@@ -65,7 +65,7 @@ object RoundRobinActors extends App {
     anActor
   }
 
-  def passBall(ball: Ball, from: String, next: String) {
+  def passBall(ball: Ball, from: String, next: String) = {
     val count = ball.batted.intValue()
     println(from + " is passing the ball to " + next + ", the pass count is " + ball.batted)
     Thread.sleep(500)

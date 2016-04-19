@@ -24,7 +24,7 @@ package com.zink.scala.fly.example
 import com.zink.fly.NotifyHandler
 
 class CallbackHandler extends NotifyHandler {
-  def templateMatched() {
+  def templateMatched() = {
     println("Template Matched!")
   }
 }

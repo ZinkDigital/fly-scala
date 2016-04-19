@@ -20,11 +20,10 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.zink.scala.fly.example
 
-import com.zink.fly.Fly
 import com.zink.scala.fly.ScalaFly
 
 object MultiOps extends App {
-  val LEASE_TIME = 100 * 1000
+  val LEASE_TIME: Long = 100 * 1000
 
   // NEVER do a get on an Either, except in a demo
   val space: ScalaFly = ScalaFly.makeFly().right.get
@@ -52,7 +51,7 @@ object MultiOps extends App {
     writeReadAndTakeMulti(space, template, entries)
   }
 
-  private def writeReadAndTakeSingle(space: ScalaFly, template: FlyEntry, entries: Seq[FlyEntry]) {
+  private def writeReadAndTakeSingle(space: ScalaFly, template: FlyEntry, entries: Seq[FlyEntry]) = {
 
     // write the objects
     for (entry <- entries) {
@@ -68,18 +67,18 @@ object MultiOps extends App {
     }
   }
 
-  private def writeReadAndTakeMulti(space: ScalaFly, template: FlyEntry, entries: Seq[FlyEntry]) {
+  private def writeReadAndTakeMulti(space: ScalaFly, template: FlyEntry, entries: Seq[FlyEntry]) = {
 
     // write the objects
     val lease = space.writeMany(entries, LEASE_TIME)
     println("done writing with lease " + lease)
 
     // read the objects
-    val reads = space.readMany(template, entries.size)
+    val reads = space.readMany(template, entries.size.toLong)
     println("done reading " + reads.size + " objects")
 
     // take the objects
-    val takes = space.takeMany(template, entries.size)
+    val takes = space.takeMany(template, entries.size.toLong)
     println("done taking " + takes.size + " objects")
   }
 }

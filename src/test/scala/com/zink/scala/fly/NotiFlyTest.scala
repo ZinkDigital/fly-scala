@@ -1,9 +1,7 @@
 package com.zink.scala.fly
 
-import org.specs2.mutable._
-import org.specs2.specification._
-import org.specs2.execute._
 import com.zink.fly.NotifyHandler
+import org.specs2.mutable._
 
 class NotiFlyTest extends Specification {
 
@@ -102,13 +100,13 @@ class NotiFlyTest extends Specification {
 
     private var matchCalled = 0
 
-    override def templateMatched() {
+    override def templateMatched() = {
       setMatchCalled(getMatchCalled + 1)
     }
 
     def getMatchCalled = matchCalled
 
-    def setMatchCalled(matchCalled: Int) {
+    def setMatchCalled(matchCalled: Int) = {
       this.matchCalled = matchCalled
     }
   }
