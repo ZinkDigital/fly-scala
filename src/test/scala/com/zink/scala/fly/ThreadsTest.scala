@@ -1,12 +1,13 @@
 package com.zink.scala.fly
 
 import com.zink.scala.fly.example.{WriteRead, WriteTake}
-import org.specs2.mutable._
 
-class ThreadsTest extends Specification {
-  
+import org.scalatest._
+
+class ThreadsTest extends FreeSpec with MustMatchers {
+
    "test Threads" in {
-       
+
     val thrd1 = new Reader()
     val thrd2 = new Taker()
 
@@ -15,18 +16,17 @@ class ThreadsTest extends Specification {
     thrd2.start()
     thrd1.join()
     thrd2.join()
-    "make specs happy" must_!= null
   }
-    
+
    class Taker extends Thread {
        override def run() = {
-           WriteTake.main(new Array[String](0) )  
+           WriteTake.main(new Array[String](0) )
        }
    }
 
    class Reader extends Thread {
        override def run() = {
-           WriteRead.main(new Array[String](0))  
+           WriteRead.main(new Array[String](0))
        }
    }
 }

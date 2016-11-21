@@ -1,14 +1,14 @@
 package com.zink.scala.fly
 
-import org.specs2.mutable._
+import org.scalatest._
 
 import scala.collection.mutable.ArrayBuffer
 
-class MultiFlyTest extends SpecificationWithJUnit {
+class MultiFlyTest extends FreeSpec with MustMatchers with Inspectors {
 
   val fly: ScalaFly = ScalaFly.makeFly().right.get
 
-  "WriteMany" in {
+  "WriteMany" - {
     val TEST_CODE = "MultiFly1"
     val numEntries = 100
 
@@ -30,7 +30,7 @@ class MultiFlyTest extends SpecificationWithJUnit {
     numEntries mustEqual countBack
   }
 
-  "ReadMany" in {
+  "ReadMany" - {
     val TEST_CODE = "MultiFly2"
 
     val numEntries = 35
@@ -51,7 +51,7 @@ class MultiFlyTest extends SpecificationWithJUnit {
 
   }
 
-  "TakeMany" in {
+  "TakeMany" - {
     val TEST_CODE = "MultiFly3"
 
     val numEntries = 25
@@ -79,7 +79,7 @@ class MultiFlyTest extends SpecificationWithJUnit {
     entries.toList.head.reference mustEqual BigInt(numToTake * 2)
   }
 
-  "Paul's Read many" in {
+  "Paul's Read many" - {
     val fly = ScalaFly.makeFly(host = "localhost").right.get
 
     val one = fly.write(Test("one"), Int.MaxValue)
@@ -94,7 +94,8 @@ class MultiFlyTest extends SpecificationWithJUnit {
     val readMany = fly.readMany(Test(null), 2)
     println("### readMany: " + readMany)
 
-    readMany must containAllOf(Seq(Test("two")))
+    readMany.size mustBe 1
+    readMany.head mustBe Test("two")
   }
 }
 case class Test(s: String)

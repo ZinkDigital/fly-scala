@@ -1,13 +1,13 @@
 package com.zink.scala.fly
 
 import com.zink.fly.NotifyHandler
-import org.specs2.mutable._
+import org.scalatest._
 
-class NotiFlyTest extends Specification {
+class NotiFlyTest extends FreeSpec with MustMatchers {
 
   val fly: ScalaFly = ScalaFly.makeFly().right.get
 
-  "Notify Match" in {
+  "Notify Match" - {
 
     // set up a notify counting handler
     val handler = new ExampleNotifyHandler()
@@ -19,9 +19,9 @@ class NotiFlyTest extends Specification {
     val result = fly.notifyWrite(template, handler, 10 * 60 * 1000)
 
     // check that it was set up ok
-    result must beTrue
+    result mustBe true
 
-    // make a matching test entry 
+    // make a matching test entry
     val entry = new TestEntry(name = "Test Entry", reference = BigInt(5), payload = "Dennis")
 
     // Make a load of writes one of which matches the the notify template
@@ -34,7 +34,7 @@ class NotiFlyTest extends Specification {
     handler.getMatchCalled mustEqual 1
   }
 
-  "Notify No Match" in {
+  "Notify No Match" - {
 
     // set up a notify counting handler
     val handler = new ExampleNotifyHandler()
@@ -46,9 +46,9 @@ class NotiFlyTest extends Specification {
     val result = fly.notifyWrite(template, handler, 10 * 60 * 1000)
 
     // check that it was set up ok
-    result must beTrue
+    result mustBe true
 
-    // make a non matching test entry 
+    // make a non matching test entry
     val entry = new TestEntry(name = "Non Matching Entry", reference = BigInt(7), payload = "Dennis")
 
     // Make a load of writes one of which matches the the notify template
@@ -61,7 +61,7 @@ class NotiFlyTest extends Specification {
     handler.getMatchCalled mustEqual 0
   }
 
-  "Notify Lease" in {
+  "Notify Lease" - {
 
     val template = new TestEntry(name = "Test 3 Entry", reference = BigInt(5))
 
@@ -73,12 +73,12 @@ class NotiFlyTest extends Specification {
     val setupOK_? = fly.notifyWrite(template, handler, 1000)
 
     // check that it was set up ok
-    setupOK_? must beTrue
+    setupOK_? mustBe true
 
     // make an entry that matches the template
     val entry = new TestEntry(name = "Test 3 Entry", reference = BigInt(5), payload = "Dennis")
 
-    // write the entry to make sure that it is matched 
+    // write the entry to make sure that it is matched
     fly.write(entry, 1000)
 
     Thread.sleep(100)
@@ -86,10 +86,10 @@ class NotiFlyTest extends Specification {
     // check that the handler got called once and once only
     handler.getMatchCalled mustEqual 1
 
-    // now wait for the lease to expire 
+    // now wait for the lease to expire
     Thread.sleep(1200)
 
-    // write the entry to make sure that it is matched 
+    // write the entry to make sure that it is matched
     fly.write(entry, 1000)
 
     // check that the handler is still only one
