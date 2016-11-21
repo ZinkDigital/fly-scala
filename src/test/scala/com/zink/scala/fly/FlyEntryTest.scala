@@ -1,12 +1,12 @@
 package com.zink.scala.fly
 
-import org.specs2.mutable._
+import org.scalatest._
 
-class FlyEntryTest extends SpecificationWithJUnit {
+class FlyEntryTest extends FlatSpec with MustMatchers {
 
   val fly: ScalaFly = ScalaFly.makeFly().right.get
 
-  "Empty Entry" in {
+  "Empty Entry" must "be read" in {
     // set up the empty entry
     val leaseTime: Long =  100L
     val entry = new EmptyEntry()
@@ -14,11 +14,11 @@ class FlyEntryTest extends SpecificationWithJUnit {
     val lease = fly.write(entry, leaseTime)
     lease mustEqual leaseTime
 
-    // then read it back 
-    fly.take(entry, 0) must beSome[EmptyEntry]
+    // then read it back
+    fly.take(entry, 0) mustBe a [Some[_]]
   }
 
-  "Entry with Long.MaxValue timeout" in {
+  "Entry with Long.MaxValue timeout" must "be read" in {
     // set up the empty entry
     val leaseTime = Long.MaxValue
     val entry = new EmptyEntry()
@@ -26,11 +26,11 @@ class FlyEntryTest extends SpecificationWithJUnit {
     val lease = fly.write(entry, leaseTime)
     lease mustEqual leaseTime
 
-    // then read it back 
-    fly.take(entry, 0) must beSome[EmptyEntry]
+    // then read it back
+    fly.take(entry, 0) mustBe a [Some[_]]
   }
 
-  "Exotic Entry" in {
+  "Exotic Entry" must "be read" in {
 
     val FIRST_NAME = "Dan"
     val LAST_NAME = "Tucker"
@@ -41,7 +41,7 @@ class FlyEntryTest extends SpecificationWithJUnit {
     entry.setName2(LAST_NAME)
     fly.write(entry, leaseTime)
 
-    // then read it back 
-    fly.read(entry, 0) must beSome(entry)
+    // then read it back
+    fly.read(entry, 0) mustBe Some(entry)
   }
 }

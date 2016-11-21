@@ -1,6 +1,5 @@
 package com.zink.scala.fly
 
-import scala.actors.Actor
 import scala.collection.JavaConverters._
 import com.zink.fly.kit._
 import com.zink.fly._
@@ -8,6 +7,7 @@ import com.zink.fly.stub.SerializingFieldCodec
 import scala.util.{ Try, Success, Failure }
 
 object ScalaFly {
+
   def makeFly(host: String = "localhost", codec: FieldCodec = new SerializingFieldCodec()): Either[Throwable, ScalaFly] = toScalaFly(FlyFactory.makeFly(host, codec))
 
   def find(): Either[Throwable, ScalaFly] = toScalaFly(new FlyFinder().find())
@@ -41,11 +41,9 @@ trait NotifyOps {
 
   def notifyWrite(template: AnyRef, handler: Notifiable, leaseTime: Long): Boolean = fly.notifyWrite(template, handler, leaseTime)
   def notifyWrite(template: AnyRef, leaseTime: Long)(block: => Unit): Boolean = fly.notifyWrite(template, new Notifier(block), leaseTime)
-  def notifyWrite(template: AnyRef, leaseTime: Long, actor: Actor): Boolean = notifyWrite(template, leaseTime) { actor ! template }
 
   def notifyTake(template: AnyRef, handler: Notifiable, leaseTime: Long): Boolean = fly.notifyTake(template, handler, leaseTime)
   def notifyTake(template: AnyRef, leaseTime: Long)(block: => Unit): Boolean = fly.notifyTake(template, new Notifier(block), leaseTime)
-  def notifyTake(template: AnyRef, leaseTime: Long, actor: Actor): Boolean = notifyTake(template, leaseTime) { actor ! template }
 }
 
 trait PerformanceOps {

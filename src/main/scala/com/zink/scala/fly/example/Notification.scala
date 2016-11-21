@@ -1,10 +1,10 @@
 /*
 
 
-Permission to use, copy, modify, and distribute this software for any 
-purpose without fee is hereby granted, provided that this entire notice 
-is included in all copies of any software which is or includes a copy 
-or modification of this software and in all copies of the supporting 
+Permission to use, copy, modify, and distribute this software for any
+purpose without fee is hereby granted, provided that this entire notice
+is included in all copies of any software which is or includes a copy
+or modification of this software and in all copies of the supporting
 documentation for such software.
 
 THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
@@ -22,8 +22,6 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package com.zink.scala.fly.example
 
 import com.zink.scala.fly.ScalaFly
-
-import scala.actors.Actor._
 
 object Notification extends App {
   val LEASE = 1 * 1000L
@@ -67,17 +65,6 @@ object Notification extends App {
     fly.notifyWrite(template, LEASE) {
       println("Block Template matched!")
     }
-
-    // now with an actor
-    val myActor = actor {
-      loop {
-        react {
-          case _ => println("Actor received a message!")
-        }
-      }
-    }
-
-    fly.notifyWrite(template, LEASE, myActor)
   }
 
   private def writeNonMatchingEntry(fly: ScalaFly) = {

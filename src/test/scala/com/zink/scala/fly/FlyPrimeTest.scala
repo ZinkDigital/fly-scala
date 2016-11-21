@@ -1,54 +1,52 @@
 package com.zink.scala.fly
 
-import org.specs2.mutable._
+import org.scalatest._
 
-class FlyPrimeTest extends Specification {
+class FlyPrimeTest extends FreeSpec with MustMatchers {
 
   val HOST = "localhost"
   val fly: ScalaFly = ScalaFly.makeFly().right.get
   val template = new TestEntry("FlyPrime 1")
 
-  override def is = args(sequential = true) ^ super.is
-
-  "WriteTake" in {
+  "WriteTake" - {
     val entry = MakeTestEntry("FlyPrime 1", BigInt(1), 200)
 
     fly.write(entry, 1000L)
-    fly.take(template, 0L) must beSome(entry)
+    fly.take(template, 0L) mustBe Some(entry)
 
     // now try and take it again to prove that
     // there is nothing there
-    fly.take(template, 0L) must beNone
+    fly.take(template, 0L) mustBe None
   }
 
-  "WriteRead" in {
+  "WriteRead" - {
     val entry = MakeTestEntry("FlyPrime 1", BigInt(2), 200)
 
     fly.write(entry, 1000L)
-    fly.read(template, 0L) must beSome(entry)
+    fly.read(template, 0L) mustBe Some(entry)
 
     // to test the read left a copy do a take
     // make sure it is the same again
-    fly.take(template, 0L) must beSome(entry)
+    fly.take(template, 0L) mustBe Some(entry)
   }
 
-  "SnapShot" in {
+  "SnapShot" - {
     val entry = MakeTestEntry("FlyPrime 1", BigInt(3), 200)
     fly.write(entry, 1000L)
     val snapshot = fly.snapshot(template)
-    fly.take(snapshot, 0L) must beSome(entry)
+    fly.take(snapshot, 0L) mustBe Some(entry)
   }
 
-  "LargeObject" in {
+  "LargeObject" - {
     val entry = MakeTestEntry("FlyPrime 1", BigInt(4), 5000)
     fly.write(entry, 1000L)
-    fly.take(template, 0L) must beSome(entry)
+    fly.take(template, 0L) mustBe Some(entry)
   }
 
-  "WaitingTake" in {
+  "WaitingTake" - {
     val entry = MakeTestEntry("FlyPrime 1", BigInt(5), 512)
     val TAKE_TIME = 576L
 
-    fly.take(template, TAKE_TIME) must beNone
+    fly.take(template, TAKE_TIME) mustBe None
   }
 }
