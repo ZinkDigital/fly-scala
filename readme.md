@@ -5,6 +5,8 @@ Welcome to Fly for Scala!
 
 **Fly** is an Object Space server that is specifically written to provide
 lightweight object based messaging between computers running on a network.
+The server is written in C, with prebuilt binaries available for Linux,
+OSX, Solaris and Win32.
 
 Before you start you need to make sure that have a version of Java installed
 and running on your machine. Type -
