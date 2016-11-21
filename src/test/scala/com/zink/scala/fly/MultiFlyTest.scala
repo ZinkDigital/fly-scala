@@ -4,11 +4,11 @@ import org.scalatest._
 
 import scala.collection.mutable.ArrayBuffer
 
-class MultiFlyTest extends FreeSpec with MustMatchers with Inspectors {
+class MultiFlyTest extends FlatSpec with MustMatchers with Inspectors {
 
   val fly: ScalaFly = ScalaFly.makeFly().right.get
 
-  "WriteMany" - {
+  "WriteMany" must "count entries" in {
     val TEST_CODE = "MultiFly1"
     val numEntries = 100
 
@@ -30,7 +30,7 @@ class MultiFlyTest extends FreeSpec with MustMatchers with Inspectors {
     numEntries mustEqual countBack
   }
 
-  "ReadMany" - {
+  "ReadMany" must "read all entries" in {
     val TEST_CODE = "MultiFly2"
 
     val numEntries = 35
@@ -41,17 +41,14 @@ class MultiFlyTest extends FreeSpec with MustMatchers with Inspectors {
     val template = new TestEntry(name = TEST_CODE)
     val numToRead = 10L
 
-    "read limited number of entries" in {
-      val entries = fly.readMany(template, numToRead)
+    val entries = fly.readMany(template, numToRead)
 
-      // Check the number of entries
-      entries.size mustEqual numToRead
-      entries.toList.head.reference mustEqual BigInt(0)
-    }
-
+    // Check the number of entries
+    entries.size mustEqual numToRead
+    entries.toList.head.reference mustEqual BigInt(0)
   }
 
-  "TakeMany" - {
+  "TakeMany" must "tale a required number of entries" in {
     val TEST_CODE = "MultiFly3"
 
     val numEntries = 25
@@ -77,25 +74,6 @@ class MultiFlyTest extends FreeSpec with MustMatchers with Inspectors {
 
     entries.size mustEqual numEntries - numToTake * 2
     entries.toList.head.reference mustEqual BigInt(numToTake * 2)
-  }
-
-  "Paul's Read many" - {
-    val fly = ScalaFly.makeFly(host = "localhost").right.get
-
-    val one = fly.write(Test("one"), Int.MaxValue)
-    println("### one: " + one)
-
-    val two = fly.write(Test("two"), Int.MaxValue)
-    println("### two: " + one)
-
-    val read = fly.read(Test(null), Int.MaxValue)
-    println("### read: " + read)
-
-    val readMany = fly.readMany(Test(null), 2)
-    println("### readMany: " + readMany)
-
-    readMany.size mustBe 1
-    readMany.head mustBe Test("two")
   }
 }
 case class Test(s: String)

@@ -31,6 +31,7 @@ val buildSettings: Seq[Setting[_]] = Defaults.defaultSettings ++ Seq[Setting[_]]
     //"-Ywarn-value-discard",
     "-Xfuture",
     "-Ywarn-unused-import"),
+    parallelExecution in Test := false,
 
 
   packageDist <<= (baseDirectory, crossTarget, version, packageBin in Compile, packageDoc in Compile, packageSrc in Compile, streams) map {
