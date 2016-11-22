@@ -2,14 +2,15 @@ General Notes
 -------------
 
 Notification support differs from the Java version in that the notify methods taking
-a NotifyHandler and a block, wrap the respective handler and block in an actor, and
-so it is safe for client code to take their good time in processing the notification.
+a NotifyHandler and a block, wrap the respective handler and block to use the underlying Java notification mechanisms.
 
-It is worth reading about the configuration of Scala's Actor implementation here:
-http://www.scala-lang.org/node/242
+Since Scala 2.12 the methods that refer to Actors have been removed - as the Actor library has been removed from the Scala base distribution.
 
 Fly Scala Release History
 -------------------------
+
+FlyScala_2.12-2.1.6 
+  Upgrade to Scala 2.12
 
 FlyScala_2.11.2-2.1.6
   Upgrade to scala 2.11
